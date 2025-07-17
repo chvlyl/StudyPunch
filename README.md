@@ -2,34 +2,40 @@
 
 ## 1. 产品概览
 
-**核心目标**: 帮助小型学习小组巩固在线课程视频内容。我们通过强制成员每天回答**所有**相关的选择题，并将"通过测验"作为打卡成功的唯一标准，来解决"学完就忘"和"缺少外部监督"的核心痛点。
+**核心目标**: 帮助用户通过参与课程、完成每周测验来巩固知识。我们旨在解决学习中的两大痛点：“缺少监督”和“学后易忘”。
 
 **核心设计理念**:
-- **先测后卡 (Answer-to-Pass)**: 简单的"签到"没有意义，必须通过知识检验才算数。
-- **公开透明 (Public Transparency)**: 所有成员都能看到彼此的打卡状态和学习进度，营造积极的同伴压力。
-- **轻度游戏化 (Lightweight Gamification)**: 通过连续打卡记录等方式激励成员保持习惯。
+- **任务驱动 (Task-Driven)**: 必须通过每周的知识测验才算完成打卡，确保学习效果。
+- **进度可视化 (Visualized Progress)**: 以图表等形式清晰展示个人和社区的学习统计数据，激励用户。
+- **社区激励 (Community Motivation)**: 在课程内部，所有成员都可以看到彼此的进度，营造积极的同伴压力。
 
-## 2. 核心功能 (MVP)
+## 2. 核心功能
 
-### 管理员 (Admin)
-- **创建学习空间 (Room)**: 可以创建独立的学习空间，设置名称、起止日期和通关所需的最低正确率。
-- **题库管理 (CRUD)**: 在空间内，增删改查完整的题库（选择题），MVP阶段不设随机抽题。
-- **自动生成任务**: 系统在每日零点，自动使用题库中的**所有题目**为当天创建一个新的打卡任务。
-- **共享数据看板**: 与成员看到同样的数据看板，了解整体进度。
+### 角色体系
+每个课程（Course）内有三种角色，一个用户可以在不同课程中担任不同角色：
+- **创建者 (Owner)**: 拥有课程的最高权限，可以修改课程设置、管理成员、管理题库，并且可以删除整个课程。
+- **组长 (Moderator)**: 拥有除“删除课程”外的所有管理权限。
+- **成员 (Member)**: 参与课程，完成每周打卡任务。
 
-### 普通成员 (Member)
-- **注册/登录**: 支持邮箱密码或魔法链接 (Magic Link) 登录。
-- **加入空间**: 通过邀请码加入一个特定的学习空间。
-- **今日任务**: 首页清晰展示"今日打卡任务"，点击后进入答题流程。
-- **答题与即时反馈**: 必须答完所有题目后提交，系统立即评分。只有正确率达到门槛才算通过；否则可重新挑战（选项会重新排序）。
-- **个人历史**: 查看自己所有的打卡记录（日期、得分、是否通过）。
-- **共享数据看板**: 查看整个空间的打卡统计，如成员的连续打卡天数、平均正确率等。
+### 核心功能列表
+- **课程创建与管理 (Owner)**
+  - 创建新的课程（Course），可设置为公开或私有（凭邀请码加入）。
+  - 设计课程大纲（Syllabus）和日程安排。
+  - 管理课程题库（增删改查选择题）。
+- **成员打卡与学习 (Member)**
+  - 在首页浏览并进入自己参与的所有课程。
+  - 完成每周打卡任务（必须答对所有题目）。
+  - 如果答错，可查看提示并重做题目。
+  - 查看个人以及课程的平均学习统计数据。
+- **系统核心功能**
+  - **智能提醒 (Notifications)**: 在任务截止前提醒未完成的成员。
+  - **数据可视化 (Visualization)**: 将学习进度和统计数据图形化展示。
 
 ### 系统自动化
 - **定时任务 (Edge Function Cron)**:
-  - 每日 `00:00` 创建当天的 `daily_tasks` 记录。
-  - 每日 `20:00` 向当天未完成打卡的成员发送提醒邮件。
-- **安全策略 (RLS)**: 基于用户在每个空间内的角色（`admin` | `member`），严格实施Supabase的行级安全策略。
+  - **每周一 `00:00`**: 为每个课程创建当周的 `weekly_tasks` 记录。
+  - **每周日 `20:00`**: 向当周未完成打卡的成员发送提醒邮件。
+- **安全策略 (RLS)**: 基于用户在每个课程内的角色 (`owner` | `moderator` | `member`)，严格实施Supabase的行级安全策略。
 
 ## 3. 技术栈
 
@@ -49,45 +55,50 @@ CREATE TABLE profiles (
   avatar_url TEXT
 );
 
--- 2. 学习空间表
-CREATE TABLE rooms (
+-- 2. 课程表
+CREATE TABLE courses (
   id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   name TEXT NOT NULL,
-  invite_code UUID UNIQUE NOT NULL DEFAULT gen_random_uuid(),
-  pass_rate_threshold NUMERIC(3, 2) NOT NULL DEFAULT 0.80 CHECK (pass_rate_threshold BETWEEN 0.00 AND 1.00),
+  description TEXT,
+  invite_code UUID UNIQUE NOT NULL DEFAULT gen_random_uuid(), -- 用于私有课程
+  visibility TEXT NOT NULL DEFAULT 'private', -- 'public' 或 'private'
+  pass_rate_threshold NUMERIC(3, 2) NOT NULL DEFAULT 1.00 CHECK (pass_rate_threshold BETWEEN 0.00 AND 1.00),
   creator_id UUID NOT NULL REFERENCES auth.users(id)
 );
 
--- 3. 空间成员与角色表
-CREATE TABLE room_members (
+-- 3. 课程成员与角色表
+CREATE TABLE course_members (
   id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  room_id BIGINT NOT NULL REFERENCES rooms(id) ON DELETE CASCADE,
+  course_id BIGINT NOT NULL REFERENCES courses(id) ON DELETE CASCADE,
   user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
-  role TEXT NOT NULL DEFAULT 'member', -- 'admin' or 'member'
-  UNIQUE (room_id, user_id)
+  role TEXT NOT NULL DEFAULT 'member', -- 'owner', 'moderator', 或 'member'
+  UNIQUE (course_id, user_id)
 );
 
 -- 4. 题库表
 CREATE TABLE questions (
   id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  room_id BIGINT NOT NULL REFERENCES rooms(id) ON DELETE CASCADE,
+  course_id BIGINT NOT NULL REFERENCES courses(id) ON DELETE CASCADE,
   question_text TEXT NOT NULL,
   options JSONB NOT NULL, -- e.g., [{"text": "A", "is_correct": true}, ...]
-  explanation TEXT
+  explanation TEXT -- 答错时显示的提示
 );
 
--- 5. 每日打卡任务表
-CREATE TABLE daily_tasks (
+-- 5. 每周打卡任务表
+CREATE TABLE tasks (
   id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  room_id BIGINT NOT NULL REFERENCES rooms(id) ON DELETE CASCADE,
-  task_date DATE NOT NULL DEFAULT CURRENT_DATE,
-  UNIQUE (room_id, task_date)
+  course_id BIGINT NOT NULL REFERENCES courses(id) ON DELETE CASCADE,
+  title TEXT NOT NULL,
+  description TEXT,
+  due_date DATE,
+  task_type TEXT NOT NULL, -- 'quiz-multiple-choice', 'punch'
+  UNIQUE (course_id, title)
 );
 
 -- 6. 打卡记录表
 CREATE TABLE punch_records (
   id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  task_id BIGINT NOT NULL REFERENCES daily_tasks(id) ON DELETE CASCADE,
+  task_id BIGINT NOT NULL REFERENCES tasks(id) ON DELETE CASCADE,
   user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
   score NUMERIC(3, 2) NOT NULL,
   is_passed BOOLEAN NOT NULL,
@@ -98,33 +109,45 @@ CREATE TABLE punch_records (
 
 **行级安全策略 (RLS) 纲要**:
 - `profiles`: 用户只能读写自己的信息。
-- `rooms`: 所有认证用户可读，只有创建者可修改。
-- `room_members`: 用户只能看到自己所属空间的成员列表，只有admin可以增删成员。
-- `questions`: 只有同一空间的成员可读，只有admin可增删改查。
-- `daily_tasks`: 只有同一空间的成员可读。
-- `punch_records`: 用户只能读写自己的记录，同一空间的admin可以读取所有记录。
+- `courses`: 所有认证用户可读，只有`owner`可删除，`owner`和`moderator`可修改。
+- `course_members`: 用户只能看到自己所属课程的成员列表，只有`owner`和`moderator`可以增删改成员。
+- `questions`: 只有同一课程的成员可读，只有`owner`和`moderator`可增删改查。
+- `tasks`: 只有同一课程的成员可读。
+- `punch_records`: 用户只能读写自己的记录，同一课程的`owner`和`moderator`可以读取所有记录。
 
 ## 5. 目录与路由规划
 
-- `/login`, `/register`: 认证页面
-- `/join-room`: 用户登录后若无空间，则跳转至此页输入邀请码
-- `/today`: 当日打卡任务页面
-- `/history`: 个人历史记录
-- `/dashboard`: 共享数据看板
-- `/admin/*`: 管理员后台，包含 `/admin/questions`, `/admin/settings` 等
+- **`/`**: 应用首页，登录后展示用户参与的所有课程列表。
+- **`/login`, `/register`**: 认证页面。
+- **`/create-course`**: 创建新课程的页面。
+- **`/join-course`**: 通过邀请码加入私有课程的页面。
+- **`/all-tasks`**: 展示所有任务的页面。
+- **`/weekly-tasks`**: 展示未来7天内到期的任务。
+- **`/courses/{courseId}`**: 课程主页，展示该课程的所有任务。
+  - **`/courses/{courseId}/intro`**: 课程介绍页面。
+  - **`/courses/{courseId}/task/{taskId}`**: 单个任务的答题页面。
+  - **`/courses/{courseId}/history`**: 个人在此课程的历史记录。
+  - **`/courses/{courseId}/dashboard`**: 课程的共享数据看板。
+  - **`/courses/{courseId}/settings`**: 课程管理页面（`owner`和`moderator`访问），包括成员管理、题库管理、课程信息修改。
 
-## 6. 里程碑计划 (14天)
+## 6. 里程碑计划
 
-- **Day 1-3: 项目初始化与认证**
-  - 完成阶段1和2，搭建好项目基础，实现数据库结构和RLS。
-- **Day 4-6: 认证与空间加入**
-  - 完成阶段3，实现完整的注册、登录、凭邀请码加入空间的流程。
-- **Day 7-9: 管理员核心功能**
-  - 完成阶段4和5，实现题库管理、空间设置和每日任务自动生成。
-- **Day 10-12: 成员核心流程与看板**
-  - 完成阶段6和7，实现完整的答题流程、个人历史和共享数据看板。
-- **Day 13-14: 自动化与测试**
-  - 完成阶段8和9，实现邮件提醒功能，编写E2E测试，并部署到Vercel。
+- **第一周: 项目基础与核心模型**
+  - 搭建项目脚手架，集成UI库和Supabase。
+  - 实现新的数据库结构和行级安全（RLS）策略。
+- **第二周: 认证与课程流程**
+  - 实现用户注册、登录。
+  - 实现创建课程、通过邀请码加入私有课程的核心流程。
+  - 用户登录后，首页能展示其加入的课程列表。
+- **第三周: 管理功能**
+  - 实现课程设置页面，允许Owner和Moderator管理题库、成员和课程信息。
+  - 实现每周任务自动生成器（Edge Function）。
+- **第四周: 核心用户体验**
+  - 实现完整的每周答题、重做、查看提示的流程。
+  - 实现个人历史记录和课程数据看板页面。
+- **第五周: 自动化与部署**
+  - 实现邮件提醒功能（Edge Function）。
+  - 编写E2E测试，并部署到Vercel。
 
 ## 7. 本地运行
 
@@ -155,8 +178,8 @@ CREATE TABLE punch_records (
 1. 实现 `/admin/questions` 页面，使用表格组件（如`shadcn/ui`的Table）进行题库的CRUD操作。
 2. 实现 `/admin/settings` 页面，用于修改空间名称、通关率等。
 
-### 阶段 5 — 每日任务生成器 (第 6 次提交)
-1. 创建Supabase Edge Function `generate-daily-tasks`，逻辑为：为每个`room`在`daily_tasks`表中创建一条记录。
+### 阶段 5 — 任务生成器 (第 6 次提交)
+1. 创建Supabase Edge Function `generate-tasks`，逻辑为：为每个`course`在`tasks`表中创建一条记录。
 2. 在Supabase后台设置cron job，每日 `00:00` (UTC) 触发此函数。
 
 ### 阶段 6 — 成员答题流程 (第 7 次提交)
