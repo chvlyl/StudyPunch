@@ -1,39 +1,52 @@
 export interface Profile {
   id: string; // Corresponds to Supabase auth.users.id
   username: string;
+  email?: string;
   avatar_url?: string;
 }
 
 export interface Course {
   id: number;
   name: string;
-  shortDescription?: string;
-  description: string;
-  role: 'owner' | 'moderator' | 'member';
-  resources?: string;
+  short_description: string | null;
+  description: string | null;
+  resources: CourseResource[] | null;
+  invite_code: string;
+  visibility: 'public' | 'private';
+  pass_rate_threshold: number;
+  creator_id: string | null;
 }
 
-export interface Task {
-  id: number;
-  courseId: number;
+export interface CourseResource {
   title: string;
-  description: string;
-  dueDate: string;
-  status: 'todo' | 'complete' | 'overdue';
-  questionCount?: number; // Optional, only for quiz type
-  type: 'quiz-multiple-choice' | 'punch';
-  questions?: Question[]; // Optional, only for quiz type
+  url: string;
 }
 
-export interface Question {
+export interface CourseMember {
   id: number;
-  question: string;
-  choices: Choice[];
-  correctAnswer: string;
-  hint?: string;
+  course_id: number;
+  user_id: string;
 }
 
-export interface Choice {
-  id: string; // e.g., 'a', 'b', 'c'
-  text: string;
-} 
+export interface Punch {
+  id: number;
+  course_id: number;
+  topic: string;
+  description: string | null;
+  due_date: string | null;
+  task_type: 'quiz-multiple-choice' | 'punch';
+}
+
+// export interface Question {
+//   id: number;
+//   course_id: number;
+//   question_text: string;
+//   options: QuestionOption[];
+//   explanation: string | null;
+// }
+
+// export interface QuestionOption {
+//   id: string;
+//   text: string;
+//   is_correct: boolean;
+// } 

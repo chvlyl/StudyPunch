@@ -1,32 +1,19 @@
-'use client'
-
-import { use } from 'react'
 import AppLayout from '@/components/AppLayout'
-import Link from 'next/link'
-import TaskCard from '@/components/TaskCard'
-import { courses, tasks } from '@/lib/dummy-data'
 import { notFound } from 'next/navigation'
-import { Settings, Info, BarChart3, History } from 'lucide-react'
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
+import { getCourse } from '../actions'
+import PunchCard from '@/components/PunchCard';
 
-export default function CoursePage({ params }: { params: Promise<{ courseId: string }> }) {
-  const resolvedParams = use(params)
-  const courseId = parseInt(resolvedParams.courseId, 10)
-  const course = courses.find((c) => c.id === courseId)
+type CoursePageProps = {
+  params: { courseId: string };
+};
+
+export default async function CoursePage({ params }: CoursePageProps) {
+  const courseId = parseInt(params.courseId, 10);
+  const { course, tasks } = await getCourse(courseId);
 
   if (!course) {
-    notFound()
+    notFound();
   }
-
-  const courseTasks = tasks.filter((t) => t.courseId === courseId);
-  const isPrivilegedUser = course.role === 'owner' || course.role === 'moderator';
 
   return (
     <AppLayout>
@@ -34,48 +21,64 @@ export default function CoursePage({ params }: { params: Promise<{ courseId: str
         <header className="flex flex-col md:flex-row justify-between md:items-center mb-8 gap-4">
           <div>
             <h1 className="text-3xl font-bold text-gray-900">{course.name}</h1>
-            <p className="text-lg text-gray-600 mt-2">{course.shortDescription}</p>
-          </div>
-          <div className="flex items-center gap-2 flex-shrink-0">
-            <ButtonAsComponent href={`/courses/${courseId}/intro`} icon={Info}>课程信息</ButtonAsComponent>
-            <ButtonAsComponent href={`/courses/${courseId}/dashboard`} icon={BarChart3}>数据看板</ButtonAsComponent>
-            <ButtonAsComponent href={`/courses/${courseId}/history`} icon={History}>做题记录</ButtonAsComponent>
-            {isPrivilegedUser && (
-              <ButtonAsComponent href={`/courses/${courseId}/settings`} icon={Settings} variant="dark">课程管理</ButtonAsComponent>
-            )}
+            <p className="text-lg text-gray-600 mt-2">{course.short_description}</p>
           </div>
         </header>
 
-        <section>
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">本周任务</h2>
-          {courseTasks.length > 0 ? (
-            <div className="space-y-4">
-              {courseTasks.map((task) => (
-                <TaskCard key={task.id} task={task} />
-              ))}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <main className="md:col-span-2">
+            <section className="mb-8">
+              <h2 className="text-2xl font-semibold text-gray-800 border-b pb-2 mb-4">
+                课程介绍
+              </h2>
+              <p className="text-lg text-gray-700 leading-relaxed whitespace-pre-line">
+                {course.description}
+              </p>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-bold text-gray-800 mb-4">本周任务</h2>
+              {tasks.length > 0 ? (
+                <div className="space-y-4">
+                  {tasks.map((task: any) => (
+                    <PunchCard
+                      key={task.id}
+                      task={task}
+                      courseName={course.name}
+                    />
+                  ))}
+                </div>
+              ) : (
+                <p className="text-gray-600">本周没有已分配的任务。</p>
+              )}
+            </section>
+          </main>
+
+          <aside className="md:col-span-1">
+            <div className="bg-gray-50 p-6 rounded-lg shadow-sm border">
+              <h3 className="text-xl font-semibold text-gray-800 mb-4">学习资源</h3>
+              {course.resources && course.resources.length > 0 ? (
+                <ul className="space-y-3">
+                  {course.resources.map((resource: any, index: number) => (
+                    <li key={index}>
+                      <a
+                        href={resource.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-600 hover:text-blue-800 hover:underline transition-colors"
+                      >
+                        {resource.title}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-gray-600">暂无学习资源。</p>
+              )}
             </div>
-          ) : (
-            <p className="text-gray-600">本周没有已分配的任务。</p>
-          )}
-        </section>
+          </aside>
+        </div>
       </div>
     </AppLayout>
   )
 }
-
-const ButtonAsComponent = ({ href, icon: Icon, children, variant = 'light' }: { href?: string, icon: React.ElementType, children: React.ReactNode, variant?: 'light' | 'dark' }) => {
-  const content = (
-    <div
-      className={`flex items-center font-semibold py-2 px-4 rounded-md transition-colors cursor-pointer ${
-        variant === 'light'
-          ? 'bg-white text-gray-800 hover:bg-gray-100 border border-gray-200'
-          : 'bg-gray-800 text-white hover:bg-gray-900'
-      }`}
-    >
-      <Icon className="w-5 h-5 mr-2" />
-      {children}
-    </div>
-  );
-
-  return href ? <Link href={href}>{content}</Link> : content;
-}; 

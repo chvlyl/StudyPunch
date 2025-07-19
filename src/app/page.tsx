@@ -1,32 +1,106 @@
-import AppLayout from '@/components/AppLayout'
-import Link from 'next/link'
-import { courses, roleDisplay } from '@/lib/dummy-data'
+import AppLayout from '@/components/AppLayout';
+import Link from 'next/link';
+import { createClient } from '@/lib/supabase/server';
+import { unstable_noStore as noStore } from 'next/cache';
+// Course type is implicitly handled by the RPC return type, but we can define it for clarity
+interface UserCourse {
+  id: number;
+  name: string;
+  short_description: string;
+  completed_punches: number;
+  total_punches: number;
+}
 
-export default function Home() {
+async function getCourses() {
+  noStore();
+  const supabase = await createClient();
+
+  const { data: { user } } = await supabase.auth.getUser();
+
+  if (!user) {
+    return { courses: [], error: 'User not logged in' };
+  }
+
+  try {
+    const { data: courses, error } = await supabase.rpc('get_courses_for_user', {
+      user_id_param: user.id,
+    });
+
+    if (error) {
+      console.error('Error fetching courses:', error);
+      return { courses: [], error: 'Failed to fetch courses.' };
+    }
+
+    return { courses: courses || [], error: null };
+  } catch (e: any) {
+    // This will catch the error if the database is not available
+    console.error('Database connection error:', e.message);
+    return { courses: [], error: 'Server is not available. Please try again later.' };
+  }
+}
+
+export default async function CoursesPage() {
+  const { courses, error } = await getCourses();
+
+  if (error === 'User not logged in') {
+    return (
+      <AppLayout>
+        <div className="flex flex-col items-center justify-center h-full text-center p-8">
+          <h1 className="text-4xl font-bold text-gray-800">欢迎来到学霸打卡</h1>
+          <p className="text-xl text-gray-600 mt-4">
+            请登录以查看您的课程并跟踪您的学习进度。
+          </p>
+          <Link href="/auth">
+            <button className="mt-8 px-8 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition-transform transform hover:scale-105">
+              前往登录
+            </button>
+          </Link>
+        </div>
+      </AppLayout>
+    );
+  }
+
   return (
     <AppLayout>
       <div className="p-8">
-        <header className="flex justify-between items-center mb-8">
+        <header className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900">我的课程</h1>
-          <Link
-            href="/create-course"
-            className="bg-blue-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-700 transition-colors"
-          >
-            创建新课程
-          </Link>
+          <p className="text-lg text-gray-600 mt-2">
+            你已加入的课程都在这里。
+          </p>
         </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {courses.map((course) => (
-            <Link key={course.id} href={`/courses/${course.id}`}>
-              <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200 h-full">
-                <h3 className="text-xl font-bold text-gray-900">{course.name}</h3>
-                <p className="text-gray-600 mt-2">{course.shortDescription}</p>
-              </div>
-            </Link>
-          ))}
-        </div>
+        {error && (
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative mb-6" role="alert">
+            <strong className="font-bold">Error: </strong>
+            <span className="block sm:inline">{error}</span>
+          </div>
+        )}
+
+        <section>
+          {courses.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {courses?.map((course: UserCourse) => (
+                <Link href={`/courses/${course.id}`} key={course.id}>
+                  <div className="block p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow h-full">
+                    <h5 className="text-xl font-bold tracking-tight text-gray-900 mb-2">{course.name}</h5>
+                    <p className="font-normal text-gray-600">{course.short_description}</p>
+                    <div className="mt-4">
+                      <span className="text-sm font-medium text-gray-700">
+                        进度: {course.completed_punches}/{course.total_punches}
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12 px-6 bg-white rounded-lg shadow-sm">
+              <p className="text-gray-500">你还没有加入任何课程。</p>
+            </div>
+          )}
+        </section>
       </div>
     </AppLayout>
-  )
+  );
 }

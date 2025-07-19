@@ -1,31 +1,58 @@
-'use client'
+'use client';
 
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { cn } from '@/lib/utils'
-import { 
-  Calendar, 
-  BookCopy,
-  LogOut 
-} from 'lucide-react'
-import { createClient } from '@/lib/supabase/client'
-import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { cn } from '@/lib/utils';
+import { Calendar, BookCopy, LogOut, User as UserIcon, Search } from 'lucide-react';
+import { createClient } from '@/lib/supabase/client';
+import { useRouter } from 'next/navigation';
+import { Profile } from '@/lib/types';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 
 const navigationItems = [
-  { name: '所有任务', href: '/all-tasks', icon: Calendar },
-  { name: '本周任务', href: '/weekly-tasks', icon: Calendar },
+  { name: '我的任务', href: '/all-tasks', icon: Calendar },
   { name: '我的课程', href: '/', icon: BookCopy },
-]
+  { name: '寻找课程', href: '/find-courses', icon: Search },
+];
 
 export default function Sidebar() {
-  const pathname = usePathname()
-  const router = useRouter()
-  const supabase = createClient()
+  const pathname = usePathname();
+  const router = useRouter();
+  const supabase = createClient();
+  const [profile, setProfile] = useState<Profile | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      if (user) {
+        const { data: profileData } = await supabase
+          .from('profiles')
+          .select('*')
+          .eq('id', user.id)
+          .single();
+        setProfile(profileData);
+      }
+      setLoading(false);
+    };
+    fetchProfile();
+  }, [supabase]);
 
   const handleLogout = async () => {
-    await supabase.auth.signOut()
-    router.push('/login')
-  }
+    await supabase.auth.signOut();
+    router.push('/auth');
+    router.refresh();
+  };
 
   return (
     <div className="flex flex-col h-full bg-gray-50 border-r border-gray-200 w-64">
@@ -39,7 +66,7 @@ export default function Sidebar() {
       {/* Navigation */}
       <nav className="flex-1 px-4 py-4 space-y-2">
         {navigationItems.map((item) => {
-          const isActive = pathname === item.href
+          const isActive = pathname === item.href;
           return (
             <Link
               key={item.name}
@@ -54,20 +81,60 @@ export default function Sidebar() {
               <item.icon className="w-5 h-5 mr-3" />
               {item.name}
             </Link>
-          )
+          );
         })}
       </nav>
 
       {/* User/Logout Section */}
       <div className="p-4 border-t border-gray-200">
-        <button
-          onClick={handleLogout}
-          className="flex items-center w-full px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover:bg-gray-100 transition-colors"
-        >
-          <LogOut className="w-5 h-5 mr-3" />
-          退出登录
-        </button>
+        {loading ? (
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-200 animate-pulse" />
+            <div className="h-4 w-24 bg-gray-200 rounded animate-pulse" />
+          </div>
+        ) : profile ? (
+          <DropdownMenu>
+            <DropdownMenuTrigger className="flex items-center w-full text-left">
+              <div className="flex items-center gap-3">
+                {profile.avatar_url ? (
+                  <img
+                    src={profile.avatar_url}
+                    alt={profile.username}
+                    className="w-10 h-10 rounded-full"
+                  />
+                ) : (
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-300">
+                    <UserIcon className="h-6 w-6 text-gray-500" />
+                  </div>
+                )}
+                <span className="truncate font-semibold text-gray-800">
+                  {profile.username}
+                </span>
+              </div>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-56" align="end" forceMount>
+              <DropdownMenuLabel className="font-normal">
+                <div className="flex flex-col space-y-1">
+                  <p className="text-sm font-medium leading-none">{profile.username}</p>
+                  <p className="text-xs leading-none text-muted-foreground">
+                    {profile.email}
+                  </p>
+                </div>
+              </DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={handleLogout}>
+                <LogOut className="w-4 h-4 mr-2" />
+                退出登录
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        ) : (
+          <Link href="/auth" className="flex items-center justify-center w-full p-2 rounded-md bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors">
+            <LogOut className="w-5 h-5 mr-2 transform -rotate-180" />
+            登陆
+          </Link>
+        )}
       </div>
     </div>
-  )
+  );
 } 
