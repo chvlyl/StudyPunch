@@ -13,30 +13,29 @@ interface UserCourse {
 
 async function getCourses() {
   console.log("Attempting to get courses...");
+  
+  // Return early for unauthenticated state without touching Supabase
   try {
     noStore();
+    console.log("Creating Supabase client...");
     const supabase = await createClient();
-    console.log("Supabase client created.");
+    console.log("Supabase client created successfully.");
 
+    console.log("Attempting to get user...");
     let user = null;
-    let userError = null;
     
     try {
-      const result = await supabase.auth.getUser();
-      user = result.data.user;
-      userError = result.error;
-    } catch (authError) {
-      console.log("Auth session missing - treating as no user");
-      // AuthSessionMissingError means no user is logged in
-      user = null;
-      userError = null;
-    }
-
-    console.log("User fetch result:", { user: user ? user.id : 'No user', userError });
-
-    if (userError) {
-      console.error("User fetch error:", userError);
-      return { courses: [], error: 'Authentication error' };
+      const { data, error } = await supabase.auth.getUser();
+      if (error) {
+        console.log("Supabase getUser returned error:", error.message);
+        return { courses: [], error: 'User not logged in' };
+      }
+      user = data.user;
+      console.log("User fetch successful:", user ? user.id : 'No user');
+    } catch (authError: any) {
+      console.log("Auth error caught:", authError.message);
+      // Any auth error means no valid session - treat as logged out
+      return { courses: [], error: 'User not logged in' };
     }
 
     if (!user) {
@@ -44,26 +43,29 @@ async function getCourses() {
       return { courses: [], error: 'User not logged in' };
     }
 
-    console.log("Calling RPC 'get_courses_for_user' for user:", user.id);
-    const { data: courses, error } = await supabase.rpc('get_courses_for_user', {
-      user_id_param: user.id,
-    });
+    console.log("User authenticated, fetching courses for:", user.id);
+    
+    try {
+      const { data: courses, error } = await supabase.rpc('get_courses_for_user', {
+        user_id_param: user.id,
+      });
 
-    if (error) {
-      console.error('!!! Supabase RPC Error:', error);
+      if (error) {
+        console.error('RPC Error:', error);
+        return { courses: [], error: 'Failed to fetch courses.' };
+      }
+
+      console.log("Successfully fetched courses:", courses ? courses.length : 0);
+      return { courses: courses || [], error: null };
+    } catch (rpcError: any) {
+      console.error('RPC Exception:', rpcError.message);
       return { courses: [], error: 'Failed to fetch courses.' };
     }
 
-    console.log("Successfully fetched courses:", courses ? courses.length : 0);
-    return { courses: courses || [], error: null };
-  } catch (e: unknown) {
-    console.error('!!! CATCH BLOCK ERROR !!!');
-    let message = 'An unknown error occurred';
-    if (e instanceof Error) {
-      message = e.message;
-    }
-    console.error('Database connection error:', message);
-    return { courses: [], error: 'Server is not available. Please try again later.' };
+  } catch (e: any) {
+    console.error('!!! TOP LEVEL ERROR !!!', e.message);
+    // If anything fails, treat as unauthenticated
+    return { courses: [], error: 'User not logged in' };
   }
 }
 
