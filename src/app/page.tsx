@@ -28,7 +28,10 @@ async function getCourses() {
       const { data, error } = await supabase.auth.getUser();
       if (error) {
         console.log("Supabase getUser returned error:", error.message);
-        return { courses: [], error: 'User not logged in' };
+        console.log("Returning user not logged in response...");
+        const response = { courses: [], error: 'User not logged in' };
+        console.log("Response created:", response);
+        return response;
       }
       user = data.user;
       console.log("User fetch successful:", user ? user.id : 'No user');
@@ -76,15 +79,20 @@ export default async function CoursesPage() {
   let courses, error;
   
   try {
+    console.log("CoursesPage: Calling getCourses...");
     const result = await getCourses();
+    console.log("CoursesPage: getCourses returned:", result);
     courses = result.courses;
     error = result.error;
+    console.log("CoursesPage: Extracted courses:", courses?.length || 0, "error:", error);
   } catch (e) {
     console.error("!!! PAGE LEVEL ERROR !!!", e);
     courses = [];
     error = "Unable to load page. Please try again later.";
   }
 
+  console.log("CoursesPage: About to check error condition, error =", error);
+  
   if (error === 'User not logged in') {
     return (
       <AppLayout>
