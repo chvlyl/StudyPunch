@@ -18,7 +18,20 @@ async function getCourses() {
     const supabase = await createClient();
     console.log("Supabase client created.");
 
-    const { data: { user }, error: userError } = await supabase.auth.getUser();
+    let user = null;
+    let userError = null;
+    
+    try {
+      const result = await supabase.auth.getUser();
+      user = result.data.user;
+      userError = result.error;
+    } catch (authError) {
+      console.log("Auth session missing - treating as no user");
+      // AuthSessionMissingError means no user is logged in
+      user = null;
+      userError = null;
+    }
+
     console.log("User fetch result:", { user: user ? user.id : 'No user', userError });
 
     if (userError) {
