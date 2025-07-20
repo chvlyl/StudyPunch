@@ -4,11 +4,7 @@ import { getCourse } from '../actions'
 import PunchCard from '@/components/PunchCard';
 import { Punch, CourseResource } from '@/lib/types';
 
-type CoursePageProps = {
-  params: { courseId: string };
-};
-
-export default async function CoursePage({ params }: CoursePageProps) {
+export default async function CoursePage({ params }: { params: { courseId: string } }) {
   const courseId = parseInt(params.courseId, 10);
   const { course, tasks } = await getCourse(courseId);
 

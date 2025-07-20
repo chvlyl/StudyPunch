@@ -206,3 +206,8 @@ CREATE TABLE punch_records (
 - 提交信息保持清晰、规范，例如 `feat(auth): implement magic link login`。
 - 涉及复杂业务逻辑时，优先考虑使用Supabase RPC函数或SQL视图，而非在客户端进行重度计算。
 - 严格遵循里程碑计划，除非提出变更。 
+
+
+# command to seed the database
+
+psql --host=aws-0-us-west-1.pooler.supabase.com --username=postgres.uvslohnshqugtlrqefvf --dbname=postgres -f supabase/seed.sql
