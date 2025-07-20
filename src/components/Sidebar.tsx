@@ -8,6 +8,8 @@ import { Calendar, BookCopy, LogOut, User as UserIcon, Search } from 'lucide-rea
 import { createClient } from '@/lib/supabase/client';
 import { useRouter } from 'next/navigation';
 import { Profile } from '@/lib/types';
+import Image from 'next/image';
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -97,9 +99,11 @@ export default function Sidebar() {
             <DropdownMenuTrigger className="flex items-center w-full text-left">
               <div className="flex items-center gap-3">
                 {profile.avatar_url ? (
-                  <img
+                  <Image
                     src={profile.avatar_url}
                     alt={profile.username}
+                    width={40}
+                    height={40}
                     className="w-10 h-10 rounded-full"
                   />
                 ) : (

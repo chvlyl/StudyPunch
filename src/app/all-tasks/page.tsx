@@ -34,25 +34,6 @@ export default async function AllTasksPage() {
 
   const completedTaskIds = new Set(punchRecords?.map(r => r.punch_id));
 
-  const allTasks: AllTask[] = tasks?.map(task => {
-    const isComplete = completedTaskIds.has(task.id);
-    const isOverdue = task.due_date ? new Date(task.due_date) < new Date() && !isComplete : false;
-    let status: 'complete' | 'todo' | 'overdue' = 'todo';
-    if (isComplete) {
-      status = 'complete';
-    } else if (isOverdue) {
-      status = 'overdue';
-    }
-
-    return {
-      ...task,
-      topic: task.topic, // Add this line
-      // @ts-ignore
-      courseName: task.courses?.name || 'Unknown Course',
-      status,
-    }
-  }) || [];
-
   return (
     <AppLayout>
       <div className="p-8">
@@ -64,13 +45,29 @@ export default async function AllTasksPage() {
         </header>
 
         <div className="space-y-4">
-          {allTasks.map((task) => (
-            <PunchCard 
-              key={task.id} 
-              task={task} 
-              courseName={task.courseName}
-            />
-          ))}
+          {tasks?.map((task) => {
+            const isComplete = completedTaskIds.has(task.id);
+            const isOverdue = task.due_date ? new Date(task.due_date) < new Date() && !isComplete : false;
+            let status: 'complete' | 'todo' | 'overdue' = 'todo';
+            if (isComplete) {
+              status = 'complete';
+            } else if (isOverdue) {
+              status = 'overdue';
+            }
+            
+            const taskWithStatus = {
+              ...task,
+              status,
+            };
+
+            return (
+              <PunchCard 
+                key={task.id} 
+                task={taskWithStatus}
+                courseName={task.courses?.name || 'Unknown Course'}
+              />
+            )
+          })}
         </div>
       </div>
     </AppLayout>

@@ -70,7 +70,7 @@ export async function completePunch(taskId: number) {
     return { error: 'You must be logged in to punch in.' };
   }
 
-  const { data, error } = await supabase
+  const { error } = await supabase
     .from('punch_records')
     .insert({
       punch_id: taskId,

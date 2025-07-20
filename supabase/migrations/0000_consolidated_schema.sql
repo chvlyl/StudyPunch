@@ -53,17 +53,26 @@ CREATE TABLE punch_records (
 -- =============================================================================
 
 -- profiles
+DROP POLICY IF EXISTS "Authenticated users can view all profiles" ON public.profiles;
+DROP POLICY IF EXISTS "Users can only update their own profile" ON public.profiles;
 ALTER TABLE profiles ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Authenticated users can view all profiles" ON profiles FOR SELECT TO authenticated USING (true);
 CREATE POLICY "Users can only update their own profile" ON profiles FOR UPDATE USING (auth.uid() = id);
 
 -- courses
+DROP POLICY IF EXISTS "Authenticated users can see all courses" ON public.courses;
+DROP POLICY IF EXISTS "Course owner can delete their own course" ON public.courses;
+DROP POLICY IF EXISTS "Course creator can update course" ON public.courses;
 ALTER TABLE courses ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Authenticated users can see all courses" ON courses FOR SELECT TO authenticated USING (true);
 CREATE POLICY "Course owner can delete their own course" ON courses FOR DELETE USING (auth.uid() = creator_id);
 CREATE POLICY "Course creator can update course" ON courses FOR UPDATE USING (auth.uid() = creator_id);
 
 -- course_members
+DROP POLICY IF EXISTS "Authenticated users can see all course memberships" ON public.course_members;
+DROP POLICY IF EXISTS "Users can enroll in courses" ON public.course_members;
+DROP POLICY IF EXISTS "Course creator can update members" ON public.course_members;
+DROP POLICY IF EXISTS "Course creator can delete members" ON public.course_members;
 ALTER TABLE course_members ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Authenticated users can see all course memberships" ON course_members FOR SELECT USING (true);
 CREATE POLICY "Users can enroll in courses" ON course_members FOR INSERT WITH CHECK (auth.uid() = user_id);
@@ -75,18 +84,17 @@ CREATE POLICY "Course creator can delete members" ON course_members FOR DELETE U
 );
 
 -- punches
+DROP POLICY IF EXISTS "Course members can see punches" ON public.punches;
+DROP POLICY IF EXISTS "Course creator can manage punches" ON public.punches;
 ALTER TABLE punches ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "Course members can see punches" ON punches FOR SELECT USING (
-  EXISTS (
-    SELECT 1 FROM course_members
-    WHERE course_id = punches.course_id AND user_id = auth.uid()
-  )
-);
+CREATE POLICY "Course members can see punches" ON punches FOR SELECT TO authenticated USING (true);
 CREATE POLICY "Course creator can manage punches" ON punches FOR ALL USING (
   auth.uid() = (SELECT creator_id FROM courses WHERE id = punches.course_id)
 );
 
 -- punch_records
+DROP POLICY IF EXISTS "Users can see and manage their own punch records" ON public.punch_records;
+DROP POLICY IF EXISTS "Course creator can see all punch records in their course" ON public.punch_records;
 ALTER TABLE punch_records ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Users can see and manage their own punch records" ON punch_records FOR ALL USING (user_id = auth.uid());
 CREATE POLICY "Course creator can see all punch records in their course" ON punch_records FOR SELECT USING (

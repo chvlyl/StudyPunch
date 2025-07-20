@@ -2,6 +2,7 @@ import AppLayout from '@/components/AppLayout'
 import { notFound } from 'next/navigation'
 import { getCourse } from '../actions'
 import PunchCard from '@/components/PunchCard';
+import { Punch, CourseResource } from '@/lib/types';
 
 type CoursePageProps = {
   params: { courseId: string };
@@ -37,10 +38,10 @@ export default async function CoursePage({ params }: CoursePageProps) {
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-gray-800 mb-4">本周任务</h2>
+              <h2 className="text-2xl font-bold text-gray-800 mb-4">我的任务</h2>
               {tasks.length > 0 ? (
                 <div className="space-y-4">
-                  {tasks.map((task: any) => (
+                  {tasks.map((task: Punch) => (
                     <PunchCard
                       key={task.id}
                       task={task}
@@ -59,7 +60,7 @@ export default async function CoursePage({ params }: CoursePageProps) {
               <h3 className="text-xl font-semibold text-gray-800 mb-4">学习资源</h3>
               {course.resources && course.resources.length > 0 ? (
                 <ul className="space-y-3">
-                  {course.resources.map((resource: any, index: number) => (
+                  {course.resources.map((resource: CourseResource, index: number) => (
                     <li key={index}>
                       <a
                         href={resource.url}

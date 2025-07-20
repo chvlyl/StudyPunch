@@ -35,6 +35,7 @@ export interface Punch {
   description: string | null;
   due_date: string | null;
   task_type: 'quiz-multiple-choice' | 'punch';
+  status: 'complete' | 'overdue' | 'todo';
 }
 
 // export interface Question {
