@@ -12,28 +12,39 @@ interface UserCourse {
 }
 
 async function getCourses() {
-  noStore();
-  const supabase = await createClient();
-
-  const { data: { user } } = await supabase.auth.getUser();
-
-  if (!user) {
-    return { courses: [], error: 'User not logged in' };
-  }
-
+  console.log("Attempting to get courses...");
   try {
+    noStore();
+    const supabase = await createClient();
+    console.log("Supabase client created.");
+
+    const { data: { user }, error: userError } = await supabase.auth.getUser();
+    console.log("User fetch result:", { user: user ? user.id : 'No user', userError });
+
+    if (userError) {
+      console.error("User fetch error:", userError);
+      return { courses: [], error: 'Authentication error' };
+    }
+
+    if (!user) {
+      console.log("No user found, returning login state.");
+      return { courses: [], error: 'User not logged in' };
+    }
+
+    console.log("Calling RPC 'get_courses_for_user' for user:", user.id);
     const { data: courses, error } = await supabase.rpc('get_courses_for_user', {
       user_id_param: user.id,
     });
 
     if (error) {
-      console.error('Error fetching courses:', error);
+      console.error('!!! Supabase RPC Error:', error);
       return { courses: [], error: 'Failed to fetch courses.' };
     }
 
+    console.log("Successfully fetched courses:", courses ? courses.length : 0);
     return { courses: courses || [], error: null };
   } catch (e: unknown) {
-    // This will catch the error if the database is not available
+    console.error('!!! CATCH BLOCK ERROR !!!');
     let message = 'An unknown error occurred';
     if (e instanceof Error) {
       message = e.message;
@@ -44,7 +55,17 @@ async function getCourses() {
 }
 
 export default async function CoursesPage() {
-  const { courses, error } = await getCourses();
+  let courses, error;
+  
+  try {
+    const result = await getCourses();
+    courses = result.courses;
+    error = result.error;
+  } catch (e) {
+    console.error("!!! PAGE LEVEL ERROR !!!", e);
+    courses = [];
+    error = "Unable to load page. Please try again later.";
+  }
 
   if (error === 'User not logged in') {
     return (
