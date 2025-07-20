@@ -25,9 +25,7 @@ export const createClient = async () => {
         },
       },
       auth: {
-        flowType: 'pkce',
-        autoRefreshToken: false,
-        persistSession: false
+        detectSessionInUrl: false
       }
     }
   )

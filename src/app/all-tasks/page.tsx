@@ -1,11 +1,15 @@
 import AppLayout from '@/components/AppLayout';
 import PunchCard from '@/components/PunchCard';
 import { createClient } from '@/lib/supabase/server';
+import { redirect } from 'next/navigation';
 
 export default async function AllTasksPage() {
   const supabase = await createClient();
 
   const { data: { user } } = await supabase.auth.getUser();
+  if (!user) {
+    redirect('/auth');
+  }
 
   const { data: tasks, error } = await supabase
     .from('punches')
