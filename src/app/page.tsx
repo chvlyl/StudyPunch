@@ -32,8 +32,9 @@ async function getCourses() {
       }
       user = data.user;
       console.log("User fetch successful:", user ? user.id : 'No user');
-    } catch (authError: any) {
-      console.log("Auth error caught:", authError.message);
+    } catch (authError: unknown) {
+      const errorMessage = authError instanceof Error ? authError.message : 'Unknown auth error';
+      console.log("Auth error caught:", errorMessage);
       // Any auth error means no valid session - treat as logged out
       return { courses: [], error: 'User not logged in' };
     }
@@ -57,13 +58,15 @@ async function getCourses() {
 
       console.log("Successfully fetched courses:", courses ? courses.length : 0);
       return { courses: courses || [], error: null };
-    } catch (rpcError: any) {
-      console.error('RPC Exception:', rpcError.message);
+    } catch (rpcError: unknown) {
+      const errorMessage = rpcError instanceof Error ? rpcError.message : 'Unknown RPC error';
+      console.error('RPC Exception:', errorMessage);
       return { courses: [], error: 'Failed to fetch courses.' };
     }
 
-  } catch (e: any) {
-    console.error('!!! TOP LEVEL ERROR !!!', e.message);
+  } catch (e: unknown) {
+    const errorMessage = e instanceof Error ? e.message : 'Unknown error';
+    console.error('!!! TOP LEVEL ERROR !!!', errorMessage);
     // If anything fails, treat as unauthenticated
     return { courses: [], error: 'User not logged in' };
   }
