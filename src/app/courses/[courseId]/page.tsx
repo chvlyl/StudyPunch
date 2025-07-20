@@ -1,11 +1,18 @@
-import AppLayout from '@/components/AppLayout'
-import { notFound } from 'next/navigation'
-import { getCourse } from '../actions'
+import AppLayout from '@/components/AppLayout';
 import PunchCard from '@/components/PunchCard';
+import { getCourse } from '../actions';
 import { Punch, CourseResource } from '@/lib/types';
+import { notFound } from 'next/navigation';
 
-export default async function CoursePage({ params }: { params: { courseId: string } }) {
-  const courseId = parseInt(params.courseId, 10);
+export const dynamic = 'force-dynamic';
+
+export default async function CoursePage({
+  params,
+}: {
+  params: Promise<{ courseId: string }>;
+}) {
+  const resolvedParams = await params;
+  const courseId = parseInt(resolvedParams.courseId, 10);
   const { course, tasks } = await getCourse(courseId);
 
   if (!course) {

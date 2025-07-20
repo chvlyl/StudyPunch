@@ -32,9 +32,13 @@ async function getCourses() {
     }
 
     return { courses: courses || [], error: null };
-  } catch (e: any) {
+  } catch (e: unknown) {
     // This will catch the error if the database is not available
-    console.error('Database connection error:', e.message);
+    let message = 'An unknown error occurred';
+    if (e instanceof Error) {
+      message = e.message;
+    }
+    console.error('Database connection error:', message);
     return { courses: [], error: 'Server is not available. Please try again later.' };
   }
 }

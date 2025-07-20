@@ -1,12 +1,6 @@
 import AppLayout from '@/components/AppLayout';
 import PunchCard from '@/components/PunchCard';
 import { createClient } from '@/lib/supabase/server';
-import { Punch } from '@/lib/types';
-
-interface AllTask extends Punch {
-  courseName: string;
-  status: 'complete' | 'todo' | 'overdue';
-}
 
 export default async function AllTasksPage() {
   const supabase = await createClient();
