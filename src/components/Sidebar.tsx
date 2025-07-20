@@ -34,16 +34,22 @@ export default function Sidebar() {
 
   useEffect(() => {
     const fetchProfile = async () => {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      if (user) {
-        const { data: profileData } = await supabase
-          .from('profiles')
-          .select('*')
-          .eq('id', user.id)
-          .single();
-        setProfile(profileData);
+      try {
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
+        if (user) {
+          const { data: profileData } = await supabase
+            .from('profiles')
+            .select('*')
+            .eq('id', user.id)
+            .single();
+          setProfile(profileData);
+        }
+      } catch (error) {
+        console.log('Sidebar: Auth error (treating as no user):', error);
+        // Treat any auth error as no user logged in
+        setProfile(null);
       }
       setLoading(false);
     };

@@ -94,6 +94,7 @@ export default async function CoursesPage() {
   console.log("CoursesPage: About to check error condition, error =", error);
   
   if (error === 'User not logged in') {
+    console.log("CoursesPage: Rendering login UI...");
     return (
       <AppLayout>
         <div className="flex flex-col items-center justify-center h-full text-center p-8">
