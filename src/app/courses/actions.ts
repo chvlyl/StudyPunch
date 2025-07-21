@@ -140,7 +140,7 @@ export async function getQuizQuestions(filePath: string) {
           console.log('Found file at alternative path:', altPath);
           const data = await fs.readFile(altPath, 'utf8');
           return JSON.parse(data);
-        } catch (e) {
+        } catch {
           console.log('Not found at:', altPath);
         }
       }
@@ -155,8 +155,8 @@ export async function getQuizQuestions(filePath: string) {
     console.error('Failed to load quiz data from local path:', error);
     console.error('Error details:', {
       message: error instanceof Error ? error.message : String(error),
-      code: (error as any)?.code,
-      path: (error as any)?.path
+      code: error && typeof error === 'object' && 'code' in error ? (error as { code: unknown }).code : undefined,
+      path: error && typeof error === 'object' && 'path' in error ? (error as { path: unknown }).path : undefined
     });
     return null;
   }
