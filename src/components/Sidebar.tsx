@@ -79,8 +79,9 @@ export default function Sidebar() {
     <div className="flex flex-col h-full bg-gray-50 border-r border-gray-200 w-64">
       {/* Logo */}
       <Link href="/">
-        <div className="flex items-center justify-center h-16 px-4 border-b border-gray-200 cursor-pointer">
+        <div className="flex flex-col items-center justify-center h-20 px-4 border-b border-gray-200 cursor-pointer">
           <h1 className="text-xl font-bold text-gray-900">学霸打卡</h1>
+          <span className="text-xs text-gray-500">v 0.7.21</span>
         </div>
       </Link>
 
