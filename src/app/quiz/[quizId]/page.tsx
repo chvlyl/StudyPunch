@@ -1,6 +1,6 @@
 import { notFound, redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
-import { getQuizQuestions, submitQuizAttempt } from '@/app/courses/actions';
+import { getQuizQuestions } from '@/app/courses/actions';
 import QuizPage from '@/components/QuizPage';
 
 export const dynamic = 'force-dynamic';

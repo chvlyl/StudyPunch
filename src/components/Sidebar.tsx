@@ -59,7 +59,7 @@ export default function Sidebar() {
     fetchProfile();
 
     // Listen for auth state changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event) => {
       if (event === 'SIGNED_IN' || event === 'SIGNED_OUT') {
         setLoading(true);
         fetchProfile();

@@ -45,7 +45,7 @@ export default async function CoursePage({
               <h2 className="text-2xl font-bold text-gray-800 mb-4">我的任务与测验</h2>
               {tasks && tasks.length > 0 ? (
                 <div className="space-y-4">
-                  {tasks.map((task: any) => (
+                  {tasks.map((task) => (
                     <TaskCard
                       key={`${task.type}-${task.id}`}
                       item={task}
