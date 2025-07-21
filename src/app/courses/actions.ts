@@ -116,48 +116,10 @@ export async function getQuizQuestions(filePath: string) {
   noStore();
   try {
     const fullPath = path.join(process.cwd(), filePath);
-    console.log('Attempting to load quiz from:', fullPath);
-    console.log('Working directory:', process.cwd());
-    console.log('File path parameter:', filePath);
-    
-    // Check if file exists
-    try {
-      await fs.access(fullPath);
-      console.log('File exists at:', fullPath);
-    } catch (accessError) {
-      console.error('File does not exist at:', fullPath);
-      
-      // Try different possible paths
-      const altPaths = [
-        path.join(process.cwd(), 'public', filePath),
-        path.join(process.cwd(), 'src', filePath),
-        path.join(__dirname, '..', '..', '..', filePath),
-      ];
-      
-      for (const altPath of altPaths) {
-        try {
-          await fs.access(altPath);
-          console.log('Found file at alternative path:', altPath);
-          const data = await fs.readFile(altPath, 'utf8');
-          return JSON.parse(data);
-        } catch {
-          console.log('Not found at:', altPath);
-        }
-      }
-      
-      throw accessError;
-    }
-    
     const data = await fs.readFile(fullPath, 'utf8');
-    console.log('Successfully loaded quiz data, length:', data.length);
     return JSON.parse(data);
   } catch (error) {
     console.error('Failed to load quiz data from local path:', error);
-    console.error('Error details:', {
-      message: error instanceof Error ? error.message : String(error),
-      code: error && typeof error === 'object' && 'code' in error ? (error as { code: unknown }).code : undefined,
-      path: error && typeof error === 'object' && 'path' in error ? (error as { path: unknown }).path : undefined
-    });
     return null;
   }
 }
