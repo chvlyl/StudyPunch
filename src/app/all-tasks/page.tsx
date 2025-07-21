@@ -1,5 +1,5 @@
 import AppLayout from '@/components/AppLayout';
-import PunchCard from '@/components/PunchCard';
+import TaskCard from '@/components/TaskCard';
 import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
 
@@ -55,13 +55,15 @@ export default async function AllTasksPage() {
             
             const taskWithStatus = {
               ...task,
+              type: 'punch' as const,
+              title: task.topic,
               status,
             };
 
             return (
-              <PunchCard 
+              <TaskCard 
                 key={task.id} 
-                task={taskWithStatus}
+                item={taskWithStatus}
                 courseName={task.courses?.name || 'Unknown Course'}
               />
             )

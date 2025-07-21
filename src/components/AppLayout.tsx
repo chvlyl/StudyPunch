@@ -1,9 +1,9 @@
-'use client'
+'use client';
 
-import Sidebar from './Sidebar'
+import Sidebar from './Sidebar';
 
 interface AppLayoutProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 export default function AppLayout({ children }: AppLayoutProps) {
@@ -19,5 +19,5 @@ export default function AppLayout({ children }: AppLayoutProps) {
         </div>
       </main>
     </div>
-  )
+  );
 } 

@@ -45,6 +45,8 @@ export default function Sidebar() {
             .eq('id', user.id)
             .single();
           setProfile(profileData);
+        } else {
+          setProfile(null);
         }
       } catch (error) {
         console.log('Sidebar: Auth error (treating as no user):', error);
@@ -53,7 +55,18 @@ export default function Sidebar() {
       }
       setLoading(false);
     };
+
     fetchProfile();
+
+    // Listen for auth state changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === 'SIGNED_IN' || event === 'SIGNED_OUT') {
+        setLoading(true);
+        fetchProfile();
+      }
+    });
+
+    return () => subscription.unsubscribe();
   }, [supabase]);
 
   const handleLogout = async () => {

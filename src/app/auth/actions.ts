@@ -5,11 +5,17 @@ import { redirect } from "next/navigation";
 
 export async function signInWithGoogle() {
   const supabase = await createClient();
+  
+  const origin = process.env.NEXT_PUBLIC_SITE_URL;
+
+  if (!origin) {
+    throw new Error('NEXT_PUBLIC_SITE_URL is not set. Please add it to your .env.local file.');
+  }
 
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: "google",
     options: {
-      redirectTo: "http://localhost:3000/auth/callback",
+      redirectTo: `${origin}/auth/callback`,
     },
   });
 

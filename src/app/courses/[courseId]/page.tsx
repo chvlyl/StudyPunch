@@ -1,7 +1,7 @@
 import AppLayout from '@/components/AppLayout';
-import PunchCard from '@/components/PunchCard';
+import TaskCard from '@/components/TaskCard';
 import { getCourse } from '../actions';
-import { Punch, CourseResource } from '@/lib/types';
+import { CourseResource } from '@/lib/types';
 import { notFound } from 'next/navigation';
 
 export const dynamic = 'force-dynamic';
@@ -13,7 +13,8 @@ export default async function CoursePage({
 }) {
   const resolvedParams = await params;
   const courseId = parseInt(resolvedParams.courseId, 10);
-  const { course, tasks } = await getCourse(courseId);
+  
+  const { course, items: tasks } = await getCourse(courseId);
 
   if (!course) {
     notFound();
@@ -41,21 +42,22 @@ export default async function CoursePage({
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-gray-800 mb-4">我的任务</h2>
-              {tasks.length > 0 ? (
+              <h2 className="text-2xl font-bold text-gray-800 mb-4">我的任务与测验</h2>
+              {tasks && tasks.length > 0 ? (
                 <div className="space-y-4">
-                  {tasks.map((task: Punch) => (
-                    <PunchCard
-                      key={task.id}
-                      task={task}
+                  {tasks.map((task: any) => (
+                    <TaskCard
+                      key={`${task.type}-${task.id}`}
+                      item={task}
                       courseName={course.name}
                     />
                   ))}
                 </div>
               ) : (
-                <p className="text-gray-600">本周没有已分配的任务。</p>
+                <p className="text-gray-600">本周没有已分配的任务或测验。</p>
               )}
             </section>
+            
           </main>
 
           <aside className="md:col-span-1">

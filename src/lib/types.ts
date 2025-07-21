@@ -17,37 +17,34 @@ export interface Course {
   creator_id: string | null;
 }
 
-export interface CourseResource {
+export type Punch = {
+  id: number;
+  course_id: number;
+  topic: string;
+  due_date: string | null;
+  status: 'complete' | 'overdue' | 'todo';
+};
+
+export type CourseResource = {
   title: string;
   url: string;
-}
+};
+
+export type Question = {
+  problem_numer: number;
+  type: string;
+  question: string;
+  options: {
+    [key: string]: string;
+  };
+  answer: string;
+  explaination: string;
+};
+
+export type Quiz = Question[];
 
 export interface CourseMember {
   id: number;
   course_id: number;
   user_id: string;
-}
-
-export interface Punch {
-  id: number;
-  course_id: number;
-  topic: string;
-  description: string | null;
-  due_date: string | null;
-  task_type: 'quiz-multiple-choice' | 'punch';
-  status: 'complete' | 'overdue' | 'todo';
-}
-
-// export interface Question {
-//   id: number;
-//   course_id: number;
-//   question_text: string;
-//   options: QuestionOption[];
-//   explanation: string | null;
-// }
-
-// export interface QuestionOption {
-//   id: string;
-//   text: string;
-//   is_correct: boolean;
-// } 
+} 
