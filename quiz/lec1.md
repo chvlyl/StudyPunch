@@ -1,499 +1,499 @@
 Question 1
 
-Q: According to the lecturer, what is the "real reason" for creating the CS 336 course?
-A. To provide a foundational understanding of common techniques.
-B. To enable students to train their own GPT-4 level models.
-C. To address the crisis of researchers being disconnected from the underlying technology.
-D. To make all lecture materials available on YouTube for a global audience.
-Answer: C
-Time: 2:25–2:38
+Q: What is the primary motivation for the CS 336 course, according to the instructors?
+A. To help students get high-paying jobs at top AI companies.
+B. To enable fundamental research by providing a deep, end-to-end understanding of building language models.
+C. To critique the over-reliance on proprietary models like GPT-4.
+D. To make all lecture materials and assignments available on YouTube for a global audience.
+Answer: B
+Time: 3:31–3:57
 
 Question 2
 
-Q: What does the lecturer mean when he says that abstractions in language models are "leaky"?
-A. They are inefficient and waste computational resources.
-B. The underlying mechanics are not fully understood, unlike in traditional programming.
-C. They often fail to generate coherent and grammatically correct text.
-D. They cannot be easily transferred from one model to another.
+Q: Why are abstractions in language models described as "leaky"?
+A. Because they often reveal confidential training data.
+B. Because the underlying mechanics are not well-defined, unlike traditional programming abstractions.
+C. Because they consume excessive memory and computational resources.
+D. Because they cannot be easily transferred between different models.
 Answer: B
 Time: 3:16–3:24
 
 Question 3
 
-Q: What is the primary philosophy of the CS 336 course?
-A. To learn by prompting proprietary models.
-B. To understand a technology, you have to build it.
-C. To focus on developing better and more efficient optimizers.
-D. To primarily study the theoretical aspects of language models.
+Q: What is a major challenge in academia for training language models that is mentioned in the lecture?
+A. Lack of skilled PhD students to conduct the research.
+B. The high cost and secrecy surrounding frontier models like GPT-4.
+C. Insufficient theoretical knowledge about transformer architectures.
+D. The difficulty in obtaining high-quality training data.
 Answer: B
-Time: 3:50–3:57
+Time: 4:05–4:45
 
 Question 4
 
-Q: Why are frontier models like GPT-4 considered "out of reach" for students in the class?
-A. The source code and architectural details are proprietary secrets.
-B. The training requires immense capital and computational resources that are not available in academia.
-C. The models are too complex to be understood within a single academic quarter.
-D. The safety limitations prevent open access to these models.
-Answer: B
-Time: 4:05–4:55
-
-Question 5
-
-Q: How does the proportion of FLOPs spent in attention versus MLP layers change as models scale up?
-A. Attention layers consistently dominate the computation at all scales.
-B. The proportion remains roughly comparable regardless of model size.
-C. MLP layers become increasingly dominant in larger models.
-D. Small models spend most FLOPs on MLP layers, while large models spend more on attention.
+Q: How does the relationship between FLOPs spent in attention layers versus MLP layers change with model scale?
+A. Attention layers consistently dominate FLOPs usage regardless of model size.
+B. The ratio of FLOPs between attention and MLP layers remains relatively constant across scales.
+C. At small scales, FLOPs are comparable, but MLP layers dominate at very large scales.
+D. At large scales, optimizing attention layers becomes the most critical factor for efficiency.
 Answer: C
 Time: 5:21–5:52
 
+Question 5
+
+Q: What does the phenomenon of "emergent behavior" in large language models imply?
+A. Models develop consciousness as they scale up.
+B. Certain abilities, like in-context learning, only appear after a model reaches a significant size.
+C. Smaller models can be fine-tuned to exhibit the same behaviors as larger ones.
+D. The model's performance grows linearly with the amount of training FLOPs.
+Answer: B
+Time: 6:20–6:50
+
 Question 6
 
-Q: What is meant by "emergent behavior" in language models as they scale?
-A. Models become more efficient at smaller scales.
-B. The training cost suddenly decreases after a certain point.
-C. Capabilities like in-context learning appear suddenly at large scales after not being present at smaller scales.
-D. The model's architecture spontaneously changes during training.
-Answer: C
-Time: 6:20–6:51
+Q: Which of the following is NOT one of the three types of knowledge the course aims to impart?
+A. Mechanics (how things work, e.g., a transformer).
+B. Mindset (e.g., taking scaling seriously).
+C. Intuitions (which decisions lead to good models).
+D. Heuristics (shortcuts for prompt engineering).
+Answer: D
+Time: 7:05–8:12
 
 Question 7
 
-Q: Which of the "three types of knowledge" does the lecturer claim can only be partially taught in the class?
-A. The mechanics of how things work (e.g., a transformer).
-B. The mindset of taking scaling seriously.
-C. The intuitions about which data and modeling decisions lead to good models.
-D. The history of language model development.
+Q: According to a Shazeer paper, what was the given reason for the success of the SwiGLU non-linearity?
+A. It was mathematically proven to be superior to ReLU.
+B. It was based on principles of cognitive neuroscience.
+C. The paper offered no scientific explanation, attributing it to "divine benevolence".
+D. It was a simplified version of a more complex, pre-existing activation function.
 Answer: C
-Time: 7:05–8:25
+Time: 8:59–9:17
 
 Question 8
 
-Q: What is the lecturer's interpretation of the "bitter lesson" by Rich Sutton?
-A. Scale is all that matters, and algorithms are irrelevant.
-B. General-purpose methods that leverage computation are ultimately the most effective.
-C. Algorithms that work at scale are what truly matter.
-D. Building larger hardware is more important than designing new algorithms.
-Answer: C
-Time: 9:32–9:52
+Q: What is the correct interpretation of the "bitter lesson" as presented in the lecture?
+A. Scale is the only thing that matters, and algorithms are irrelevant.
+B. Algorithms that perform well at scale are what truly matter for advancing AI.
+C. Human-like cognitive architectures will eventually outperform scaling.
+D. Any gains from better algorithms are quickly nullified by increased compute.
+Answer: B
+Time: 9:37–9:52
 
 Question 9
 
-Q: According to a 2020 study mentioned, how much did algorithmic efficiency improve for training ImageNet from 2012 to 2019?
-A. 2x, roughly following Moore's Law.
-B. 10x, a significant but expected improvement.
-C. 44x, which was faster than Moore's Law.
-D. 100x, due to the invention of the transformer.
-Answer: C
-Time: 10:57–11:16
+Q: The lecture highlights a significant improvement in algorithmic efficiency for ImageNet training between 2012 and 2019. How large was this improvement?
+A. 10x, roughly in line with Moore's law.
+B. 2x, a modest but important gain.
+C. 100x, far exceeding any hardware improvements.
+D. 44x, a rate faster than Moore's law.
+Answer: D
+Time: 11:02–11:09
 
 Question 10
 
-Q: What key development in the 2010s was NOT a direct predecessor to the transformer model?
-A. The Adam optimizer.
-B. Sequence-to-sequence (seq-to-seq) models.
-C. Large-scale N-gram models trained on trillions of tokens.
-D. The attention mechanism.
+Q: What is the central question that the lecture proposes should frame the task of building language models?
+A. How can we build a model that perfectly mimics human conversation?
+B. What is the fastest way to train a model on the entire internet?
+C. What is the best model one can build given a certain compute and data budget?
+D. How can we ensure a model is completely safe and unbiased before deployment?
 Answer: C
-Time: 12:48–13:15
+Time: 11:42–11:47
 
 Question 11
 
-Q: What distinguishes "open source models" from "open weight models" according to the lecture?
-A. Open weight models are more powerful than open source models.
-B. Open source models make both the weights and the data available, while open weight models only release the weights.
-C. Open source models are free for commercial use, whereas open weight models are not.
-D. There is no difference; the terms are used interchangeably.
-Answer: B
-Time: 16:28–16:48
+Q: Which of these is NOT an "ingredient" mentioned as falling into place during the 2010s that enabled the deep learning revolution for language models?
+A. The Adam optimizer.
+B. The transformer architecture.
+C. The concept of reinforcement learning from human feedback (RLHF).
+D. Seq-to-seq models.
+Answer: C
+Time: 13:21–14:00
 
 Question 12
 
-Q: What is the main purpose of a tokenizer in the language modeling pipeline?
-A. To correct spelling and grammar in the input text.
-B. To convert strings into sequences of integers and back.
-C. To filter out irrelevant or harmful content from the training data.
-D. To compress the model weights for more efficient storage.
+Q: What was the key contribution of models like ELMo, BERT, and T5?
+A. They were the first models to use the transformer architecture.
+B. They pioneered the idea of foundation models that could be adapted to many downstream tasks.
+C. They were the first truly open-source models with both weights and data released.
+D. They demonstrated emergent abilities like in-context learning.
 Answer: B
-Time: 27:57–28:02
+Time: 14:43–14:51
 
 Question 13
 
-Q: Which of the following is NOT an improvement to the original transformer architecture mentioned in the lecture?
-A. Rotary Positional Embeddings (RoPE).
-B. RMS Norm instead of LayerNorm.
-C. The use of Recurrent Neural Networks (RNNs) instead of attention.
-D. SwiGLU non-linear activation function.
-Answer: C
-Time: 29:42–30:44
+Q: The lecture describes three levels of openness for language models. What is the defining characteristic of "open weight" models?
+A. The model weights are available, but details about the training data are often missing.
+B. Only the model's architecture is published, not the weights or data.
+C. All weights, data, and training code are fully available.
+D. The model is accessible via an API, but no other details are provided.
+Answer: A
+Time: 16:33–16:39
 
 Question 14
 
-Q: In the context of inference, what is the "pre-fill" phase?
-A. Generating tokens one by one autoregressively.
-B. The initial processing of the input prompt through the model.
-C. Fine-tuning the model on the prompt before generating a response.
-D. Selecting the best response from multiple generated candidates.
+Q: In the overview of the course's five pillars, what is the goal of the "Basics" unit?
+A. To learn how to use pre-trained models via APIs.
+B. To get a basic version of a full model training pipeline working from scratch.
+C. To understand the history and theory behind language models.
+D. To master advanced prompt engineering techniques.
 Answer: B
-Time: 38:29–38:36
+Time: 27:43–27:49
 
 Question 15
 
-Q: Why is the autoregressive decoding phase of inference often memory-bound?
-A. It requires storing the entire training dataset in memory.
-B. It's hard to saturate the GPUs when generating one token at a time, leading to bottlenecks in data movement.
-C. The model's size dynamically increases with each generated token.
-D. It uses a very large vocabulary that does not fit into the GPU cache.
-Answer: B
-Time: 38:58–39:10
+Q: Which improvement to the original transformer architecture is a type of non-linear activation function?
+A. RMSNorm
+B. Rotary Positional Embeddings (RoPE)
+C. SwiGLU
+D. Mixture of Experts (MoE)
+Answer: C
+Time: 30:02–30:11
 
 Question 16
 
-Q: What is the core idea behind "speculative decoding"?
-A. Using a cheaper, smaller model to generate multiple token candidates that are then verified by the larger model.
-B. Generating multiple independent responses and picking the most plausible one.
-C. Skipping parts of the model architecture to speed up token generation.
-D. Reducing the precision of the model weights from 32-bit to 8-bit floats.
-Answer: A
-Time: 39:16–39:42
+Q: What normalization method is mentioned as a simpler alternative to the original transformer's LayerNorm?
+A. BatchNorm
+B. RMSNorm
+C. InstanceNorm
+D. GroupNorm
+Answer: B
+Time: 30:24–30:30
 
 Question 17
 
-Q: What fundamental trade-off is addressed by the "Chinchilla optimal" scaling laws?
-A. The trade-off between training speed and model accuracy.
-B. The trade-off between the number of layers and the hidden dimension size.
-C. The trade-off between model size and the amount of training data for a fixed compute budget.
-D. The trade-off between pre-training and fine-tuning costs.
-Answer: C
-Time: 41:11–41:22
+Q: What will be the primary task in Assignment 1?
+A. Fine-tuning a pre-trained model on a custom dataset.
+B. Implementing a BPE tokenizer, transformer model, and training loop from scratch using PyTorch.
+C. Writing a research paper on the ethics of large language models.
+D. Optimizing a model's inference speed using Triton.
+Answer: B
+Time: 32:27–32:48
 
 Question 18
 
-Q: What is the simple rule of thumb derived from scaling laws for the relationship between model size (N) and the number of training tokens?
-A. Number of tokens should be approximately equal to N.
-B. Number of tokens should be approximately 20 times N.
-C. Number of tokens should be approximately N squared.
-D. Number of tokens should be approximately the square root of N.
+Q: In the "Systems" part of the course, what is the main challenge related to GPU hardware?
+A. The slow speed of floating point operations.
+B. The high cost of data movement between memory and compute units.
+C. The lack of available GPUs for academic research.
+D. The difficulty of writing code in CUDA.
 Answer: B
-Time: 42:23–42:37
+Time: 35:15–35:39
 
 Question 19
 
-Q: What is a major reason that one cannot simply "train the model on the internet"?
-A. The internet contains copyrighted material that cannot be used legally.
-B. Most of the web is "trash" (spammy, low-quality) and requires extensive filtering and curation.
-C. Internet data is mostly images and videos, not text.
-D. The internet's data volume is too large even for frontier models to process.
-Answer: B
-Time: 46:50–48:15
+Q: What is the purpose of using Triton in the "Systems" unit?
+A. To build custom, high-performance GPU kernels for operations like fusion and tiling.
+B. To automatically parallelize model training across multiple nodes.
+C. To manage and schedule jobs on the H100 cluster.
+D. To visualize the internal states of a running model.
+Answer: A
+Time: 35:54–36:00
 
 Question 20
 
-Q: After pre-training, what is the initial capability of a "base model"?
-A. It can follow instructions and answer questions accurately.
-B. It can only generate text in a specific style.
-C. It can complete the next token based on the input text.
-D. It can verify the correctness of mathematical proofs.
+Q: What makes the autoregressive decoding part of inference particularly difficult to optimize?
+A. It requires a massive amount of VRAM.
+B. It is computationally intensive due to large matrix multiplications.
+C. It is often memory-bound because tokens are generated one at a time, making it hard to saturate the GPU.
+D. It can only be performed on CPUs, not GPUs.
 Answer: C
-Time: 50:29–50:36
+Time: 38:58–39:10
 
 Question 21
 
-Q: What is the goal of "Supervised Fine-Tuning" (SFT)?
-A. To train the model from scratch on a small, high-quality dataset.
-B. To teach the model to follow instructions by training it on prompt-response pairs.
-C. To reduce the size of the model by pruning unnecessary weights.
-D. To increase the model's vocabulary with new, domain-specific tokens.
+Q: What is speculative decoding?
+A. A technique to guess the user's next prompt.
+B. A method where a smaller, cheaper model generates multiple tokens that are then verified by the main model.
+C. A way to train models on hypothetical or "speculative" data.
+D. An algorithm for finding the single most likely next token.
 Answer: B
-Time: 51:43–52:05
+Time: 39:22–39:34
 
 Question 22
 
-Q: What kind of data is used in algorithms like DPO (Direct Preference Optimization)?
-A. Prompt-response pairs where the response is written by a human expert.
-B. Data where a human has rated which of two model-generated responses is better.
-C. Text that has been formally verified for correctness, such as mathematical proofs.
-D. Data that has been automatically generated by another language model.
+Q: What is the key question that "Scaling Laws" aim to answer?
+A. How much will it cost to train the next generation of models?
+B. Given a fixed compute budget, what is the optimal model size and amount of training data?
+C. Which hardware is most efficient for training transformers?
+D. At what point do models start to show emergent abilities?
 Answer: B
-Time: 53:13–53:26
+Time: 41:11–41:22
 
 Question 23
 
-Q: Which tokenization method results in very long sequences and a compression ratio of 1?
-A. Character-based tokenization.
-B. Word-based tokenization.
-C. Byte-based tokenization.
-D. Byte Pair Encoding (BPE).
-Answer: C
-Time: 1:08:20–1:08:40
+Q: The "Chinchilla optimal" scaling laws suggest a simple rule of thumb for the relationship between model size (N) and the number of tokens to train on. What is that rule?
+A. Train on N * 10 tokens.
+B. Train on N * 20 tokens.
+C. Train on N^2 tokens.
+D. Train on sqrt(N) tokens.
+Answer: B
+Time: 42:23–42:37
 
 Question 24
 
-Q: What is a major drawback of simple word-based tokenization?
-A. It produces very short, inefficient sequences.
-B. The vocabulary size is fixed and cannot be changed.
-C. It cannot handle punctuation or special characters.
-D. It struggles with rare or new words, often requiring an "UNK" (unknown) token.
-Answer: D
-Time: 1:10:04–1:10:39
+Q: What is a primary finding from looking at raw Common Crawl data?
+A. It is a highly curated and clean dataset, ideal for training.
+B. It consists mostly of academic papers and books.
+C. A large portion of the data is "trash" or spammy, requiring significant filtering.
+D. It lacks data in languages other than English.
+Answer: C
+Time: 48:05–48:15
 
 Question 25
 
-Q: What is the fundamental principle of the Byte Pair Encoding (BPE) algorithm?
-A. It splits words into their constituent syllables.
-B. It recursively merges the most frequently occurring adjacent pair of tokens.
-C. It assigns a unique token to every word in the training corpus.
-D. It encodes each character as its raw UTF-8 byte value.
+Q: Why is deduplication of the training data an important step?
+A. To reduce the total size of the dataset and save storage costs.
+B. To prevent the model from overfitting and memorizing specific examples.
+C. To comply with copyright laws regarding data usage.
+D. To ensure the model is trained on a diverse range of topics.
 Answer: B
-Time: 1:12:43–1:13:07
+Time: 49:55-50:00
 
 Question 26
 
-Q: In the context of tokenization, what is the "compression ratio"?
-A. The size of the model weights divided by the vocabulary size.
-B. The number of bytes in the original text divided by the number of generated tokens.
-C. The time it takes to tokenize a text versus the time to process it.
-D. The ratio of known words to unknown words in a text.
-Answer: B
-Time: 1:04:40–1:04:48
+Q: What is the goal of the "Alignment" phase of model training?
+A. To increase the model's raw intelligence and knowledge.
+B. To make the model's architecture more efficient.
+C. To make the model useful by teaching it to follow instructions, adhere to a specific style, and be safe.
+D. To compress the model's weights for faster deployment.
+Answer: C
+Time: 50:43–50:50
 
 Question 27
 
-Q: Why is character-based tokenization that uses Unicode code points inefficient?
-A. The sequences are too long for the model to process.
-B. It cannot represent emojis or non-English characters.
-C. The vocabulary becomes huge, and many code points for rare characters are used inefficiently.
-D. It is not a reversible process, so you cannot decode the tokens back to text.
-Answer: C
-Time: 1:05:51–1:06:30
+Q: What kind of data is used in Supervised Fine-Tuning (SFT)?
+A. A large corpus of unlabeled web text.
+B. Pairs of prompts and desired responses.
+C. Preference data indicating which of two responses is better.
+D. Data generated by the model itself.
+Answer: B
+Time: 51:49–51:59
 
 Question 28
 
-Q: How did GPT-2's tokenizer handle pre-processing before applying the BPE algorithm?
-A. It first converted the entire text into a sequence of bytes.
-B. It used a word-based tokenizer to break the text into segments first.
-C. It filtered out all punctuation and capitalization.
-D. It did no pre-processing and applied BPE to the raw text.
-Answer: B
-Time: 1:12:29–1:12:43
+Q: What is the primary advantage of learning from feedback (like DPO) over SFT?
+A. It allows the model to learn from lighter forms of annotation, like preference data, which can be cheaper to collect.
+B. It is computationally less expensive than SFT.
+C. It completely eliminates the need for human-generated data.
+D. It is the only way to teach a model safety and refusal skills.
+Answer: A
+Time: 53:04–53:13
 
 Question 29
 
-Q: During the BPE training process, what happens to the vocabulary?
-A. It remains fixed at 256 entries for all bytes.
-B. It shrinks as common pairs are merged.
-C. It starts with byte-level tokens and expands with new tokens for each merge.
-D. It is defined by a pre-existing list of common words.
+Q: What type of data does the DPO (Direct Preference Optimization) algorithm use?
+A. User-assistant dialogue turns.
+B. Text with quality scores assigned by a verifier.
+C. Pairs of responses where one is labeled as better than the other.
+D. A dataset of harmful prompts to teach refusal.
 Answer: C
-Time: 1:14:47–1:15:00
+Time: 53:20–54:37
 
 Question 30
 
-Q: What is the lecturer's view on the future of tokenization?
-A. BPE will remain the standard for the foreseeable future.
-B. He hopes for architectures that can operate directly on bytes, making tokenization obsolete.
-C. Word-based tokenization will make a comeback due to its simplicity.
-D. Tokenization will be replaced by methods that operate on individual pixels of text images.
-Answer: B
-Time: 1:18:18–1:18:25
+Q: What is the core function of a tokenizer in a language model pipeline?
+A. To translate text from one language to another.
+B. To correct grammatical errors in the input string.
+C. To convert raw text strings into sequences of integers (tokens) and back.
+D. To filter out harmful or irrelevant content from the input.
+Answer: C
+Time: 1:00:49–1:01:12
 
 Question 31
 
-Q: What is the primary role of a GPU's memory (HBM) in relation to its compute units?
-A. It acts as the factory where computations happen.
-B. It is a long-term archive for the training data.
-C. It acts as the warehouse for data and model parameters, which must be moved to compute units.
-D. It is used exclusively for storing the final trained model.
+Q: What is a significant drawback of using simple character-based tokenization with Unicode code points?
+A. It cannot handle emojis or special characters.
+B. The sequence length becomes excessively long.
+C. The vocabulary size becomes very large, and it's an inefficient use of the vocabulary for rare characters.
+D. The encoding is not reversible, leading to data loss.
 Answer: C
-Time: 35:04–35:15
+Time: 1:06:12–1:06:49
 
 Question 32
 
-Q: What is a major bottleneck that kernel optimization techniques like fusion and tiling aim to minimize?
-A. The cost of floating-point arithmetic operations.
-B. The cost of data movement between memory and compute units.
-C. The time it takes to compile the kernel code.
-D. The power consumption of the GPU chip.
+Q: What is the main problem with pure byte-based tokenization?
+A. The vocabulary size is too large (over 65,000).
+B. It results in very long token sequences, which is inefficient for models with quadratic attention complexity.
+C. It cannot represent all characters in the UTF-8 standard.
+D. It is computationally expensive to convert strings to bytes.
 Answer: B
-Time: 35:24–35:39
+Time: 1:08:20–1:08:47
 
 Question 33
 
-Q: What type of parallelism involves splitting the model itself across multiple GPUs?
-A. Data parallelism.
-B. Tensor parallelism.
-C. Pipeline parallelism.
-D. Both B and C are forms of model parallelism.
-Answer: D
-Time: 14:16, 37:04
+Q: What is a major issue with traditional word-based tokenization that BPE aims to solve?
+A. It splits words into too many sub-word units.
+B. It cannot handle punctuation or spaces.
+C. It produces an unbounded vocabulary and struggles with rare or unseen words (out-of-vocabulary problem).
+D. It is not adaptive to the statistics of the training corpus.
+Answer: C
+Time: 1:10:04–1:10:39
 
 Question 34
 
-Q: According to the lecture, why has efficiency become even MORE important at large scales?
-A. Because smaller models are already perfectly efficient.
-B. Because when spending hundreds of millions of dollars, you cannot afford to be wasteful.
-C. Because there is a global shortage of GPUs.
-D. Because large models are inherently slower than small models.
-Answer: B
-Time: 10:07–10:19
+Q: The Byte Pair Encoding (BPE) algorithm was first introduced to NLP for what task?
+A. Text classification.
+B. Language modeling.
+C. Named entity recognition.
+D. Neural machine translation.
+Answer: D
+Time: 1:11:16–1:11:22
 
 Question 35
 
-Q: What was a key contribution of OpenAI that led to models like GPT-2 and GPT-3?
-A. Inventing the transformer architecture from scratch.
-B. Being the first to use GPUs for training neural networks.
-C. Taking existing ingredients and pushing on scaling laws with strong engineering.
-D. Developing the first open-source language model.
-Answer: C
-Time: 15:18–15:32
+Q: What is the fundamental principle of the BPE algorithm?
+A. It splits words based on a fixed set of grammatical rules.
+B. It learns to merge the most frequently occurring adjacent pair of tokens iteratively.
+C. It assigns a unique token to every word found in the training corpus.
+D. It breaks down all text into individual bytes.
+Answer: B
+Time: 1:12:49–1:12:54
 
 Question 36
 
-Q: What is the main goal of the "Data" unit of the course?
-A. Learning how to write code for data processing.
-B. Understanding how to crawl the entire internet for data.
-C. Understanding data sourcing, curation, filtering, and evaluation.
-D. Learning to use synthetic data exclusively for training.
+Q: In the BPE training process, what is the initial state of the text sequence?
+A. It is a sequence of words separated by spaces.
+B. It is a sequence of Unicode characters.
+C. It is a sequence of bytes.
+D. It is a sequence of pre-defined subword units.
 Answer: C
-Time: 45:03, 46:43-49:55
+Time: 1:12:43–1:12:49
 
 Question 37
 
-Q: What is the purpose of deduplication in the data processing pipeline?
-A. To ensure the model does not see the exact same data multiple times, which can affect training.
-B. To reduce the storage cost of the dataset.
-C. To remove any text that contains repeated words.
-D. To filter out documents written in foreign languages.
-Answer: A
-Time: 49:55–50:00
+Q: As the BPE algorithm performs merges, what happens to the length of the token sequence representing the training text?
+A. It increases.
+B. It stays the same.
+C. It decreases.
+D. It fluctuates unpredictably.
+Answer: C
+Time: 1:15:46–1:15:46
 
 Question 38
 
-Q: The process of making a model useful, instruction-following, and safe is broadly referred to as what?
-A. Pre-training.
-B. Alignment.
-C. Tokenization.
-D. Inference.
+Q: When using a trained BPE tokenizer to encode a new string, what is the process?
+A. The string is first broken into words, and each word is looked up in the vocabulary.
+B. The string is converted to bytes, and then the learned merge operations are replayed in the same order they were learned.
+C. The string is compared against the entire training corpus to find the closest match.
+D. The BPE algorithm is re-run from scratch on the new string.
 Answer: B
-Time: 50:43–50:50
+Time: 1:16:44–1:16:51
 
 Question 39
 
-Q: What is a key limitation of the Chinchilla scaling laws mentioned in the lecture?
-A. They only apply to models smaller than one billion parameters.
-B. They do not take the cost of inference into account.
-C. They are only accurate for training on pure code datasets.
-D. They become inaccurate if the model is trained for more than one epoch.
+Q: The lecture mentions a "compression ratio" for tokenizers. What does this ratio represent?
+A. The number of tokens divided by the number of words.
+B. The number of bytes in the original string divided by the number of tokens generated.
+C. The size of the model vocabulary divided by the size of the training data.
+D. The time it takes to encode versus decode a string.
 Answer: B
-Time: 42:44–42:52
+Time: 1:04:40–1:04:48
 
 Question 40
 
-Q: What is the primary task in Assignment 3 on Scaling Laws?
-A. To implement the most efficient transformer model possible.
-B. To use a limited compute budget to run small-scale experiments to predict performance at a larger scale.
-C. To manually fine-tune a model to achieve the lowest possible loss.
-D. To collect the largest possible dataset for training.
-Answer: B
-Time: 43:20–43:41
+Q: The GPT-2 tokenizer uses a pre-tokenization step before applying BPE. What does this step do?
+A. It converts all text to lowercase.
+B. It removes all punctuation.
+C. It uses a regular expression to split the string into segments, and BPE is run on each segment.
+D. It translates the text into a standardized byte format.
+Answer: C
+Time: 1:12:34–1:12:43
 
 Question 41
 
-Q: In the provided example, why is `hello` a different token from ` hello` (with a leading space)?
-A. It is a mistake in the tokenizer that needs to be corrected.
-B. The tokenizer treats capitalized and non-capitalized words differently.
-C. The space is considered part of the token, making it a distinct entity.
-D. One is an English word and the other is a special command token.
+Q: What is the current status of "tokenizer-free" approaches that operate directly on raw bytes?
+A. They are the new standard for all frontier models.
+B. They have been shown to be more compute-efficient than BPE.
+C. The work is promising, but so far has not been successfully scaled to frontier models.
+D. They have been proven to be fundamentally flawed and are no longer an active area of research.
 Answer: C
-Time: 1:02:04–1:02:27
+Time: 28:43–28:56
 
 Question 42
 
-Q: The lecturer mentions that the first neural language model dates back to 2003 from which research group?
-A. Google Brain.
-B. OpenAI.
-C. Joshua Bengio's group.
-D. Meta AI (FAIR).
+Q: The lecture mentions that if you have a lot of data but are compute-constrained, you might filter data aggressively. Why?
+A. To reduce data storage costs.
+B. To avoid legal issues with copyrighted data.
+C. To avoid wasting precious compute on bad or irrelevant data.
+D. To make the model smaller and faster for inference.
 Answer: C
-Time: 13:21–13:27
+Time: 56:43–56:49
 
 Question 43
 
-Q: Which popular optimizer, still widely used today, was introduced over a decade ago?
-A. SGD (Stochastic Gradient Descent).
-B. Adam.
-C. RMSprop.
-D. AdaGrad.
-Answer: B
-Time: 13:41–13:48
+Q: Which optimizer is mentioned as the one predominantly used and taught in the class?
+A. AdamW
+B. SGD
+C. Muon
+D. SOAP
+Answer: A
+Time: 31:42–31:48
 
 Question 44
 
-Q: Which tool is mentioned for writing custom, high-performance GPU kernels in the course?
-A. CUDA C++.
-B. OpenCL.
-C. PyTorch C++ Extensions.
-D. Triton.
-Answer: D
-Time: 35:54–36:00
+Q: What is the main reason that training is typically done for only a single epoch in a compute-constrained regime?
+A. To prevent the model from overfitting to the training data.
+B. Multiple epochs provide diminishing returns and it's more efficient to see more unique data.
+C. The hardware cannot handle reloading the dataset for a second epoch.
+D. It is a convention set by the original transformer paper.
+Answer: B
+Time: 57:11–57:18
 
 Question 45
 
-Q: In the BPE training example, why is the pair `(116, 104)` merged first?
-A. Because it is the first pair in the sequence.
-B. Because it is the most frequently occurring pair in the training data.
-C. Because the numbers are the lowest in value.
-D. The choice is random.
+Q: In the GPU analogy, what do the "factory" and the "warehouse" represent?
+A. Factory: CPU, Warehouse: GPU
+B. Factory: Compute units, Warehouse: Memory (DRAM)
+C. Factory: The entire GPU, Warehouse: The network connection
+D. Factory: The software, Warehouse: The hardware
 Answer: B
-Time: 1:14:24–1:14:42
+Time: 35:15–35:15
 
 Question 46
 
-Q: What is one of the main reasons given for NOT taking the CS 336 class?
-A. If you want to get any other research done during the quarter.
-B. If you are not a Stanford student.
-C. If you are not proficient in Python.
-D. If you do not have access to a powerful personal computer.
-Answer: A
-Time: 21:34–21:40
+Q: What distinguishes the "pre-fill" phase from the "decode" phase in inference?
+A. Pre-fill is memory-bound, while decode is compute-bound.
+B. Pre-fill processes the prompt tokens in parallel, while decode generates tokens one by one.
+C. Pre-fill happens during training, while decode happens during deployment.
+D. Pre-fill uses a small model, while decode uses a large model.
+Answer: B
+Time: 38:29–38:41
 
 Question 47
 
-Q: What is an example of a "verifier" that can be used for learning from feedback?
-A. A human who provides a rating on a scale of 1-5.
-B. A formal verifier for correctness in domains like math or code.
-C. A smaller language model that checks for grammatical errors.
-D. A user who decides whether to accept or reject the model's output.
+Q: What kind of supervision can be used in domains like math or code where formal verification is possible?
+A. Preference data from human labelers.
+B. Using a formal verifier to check the correctness of a generated response.
+C. Instruction-following data from online tutorials.
+D. Self-generated data from the model itself.
 Answer: B
 Time: 53:50–53:56
 
 Question 48
 
-Q: What does the lecturer state is a key factor that differentiates models, aside from architecture and systems?
-A. The learning rate schedule.
-B. The number of GPUs used for training.
-C. The data used for training.
-D. The random seed used for initialization.
+Q: Which alternative to the transformer, mentioned as a more radical architectural change, is based on state space models?
+A. GQA (Grouped-Query Attention)
+B. Mixture of Experts (MoE)
+C. Hyena
+D. SwiGLU
 Answer: C
-Time: 45:03–45:11
+Time: 31:17–31:17
 
 Question 49
 
-Q: The lecturer describes the current era as being "compute constrained." What does he predict will happen as frontier labs become "data constrained"?
-A. The design decisions and architectures will likely change significantly.
-B. Training will become much cheaper and more accessible.
-C. Models will stop improving in capability.
-D. Efficiency will no longer be an important consideration.
+Q: Why is having a good base model crucial before the alignment phase?
+A. Alignment cannot add new knowledge; it can only modify a model that already has raw potential.
+B. A good base model is smaller and cheaper to align.
+C. The alignment algorithms like DPO only work on models trained on web-scale data.
+D. The base model determines the final vocabulary size.
 Answer: A
-Time: 58:09–58:22
+Time: 50:36–52:12
 
 Question 50
 
-Q: What is the core function of the `decode` operation in a tokenizer?
-A. To convert a sequence of integer tokens back into a readable string.
-B. To apply the merge rules to a sequence of bytes.
-C. To calculate the compression ratio of a text.
-D. To split a string into a sequence of tokens.
-Answer: A
-Time: 1:01:04–1:01:12 
+Q: By convention, where is the space character typically placed by tokenizers like BPE?
+A. It is discarded during tokenization.
+B. It is appended to the end of a token.
+C. It is converted into a special <SPACE> token.
+D. It is prepended to the beginning of the following token.
+Answer: D
+Time: 1:02:19–1:02:19 
