@@ -3,48 +3,6 @@
     "week": 1,
     "problem_numer": 1,
     "type": "multiple-choice",
-    "question": "What is the primary motivation for the CS 336 course, according to the instructors?",
-    "options": {
-      "A": "To help students get high-paying jobs at top AI companies.",
-      "B": "To enable fundamental research by providing a deep, end-to-end understanding of building language models.",
-      "C": "To critique the over-reliance on proprietary models like GPT-4.",
-      "D": "To make all lecture materials and assignments available on YouTube for a global audience."
-    },
-    "answer": "B",
-    "explaination": "time 3:31–3:57"
-  },
-  {
-    "week": 1,
-    "problem_numer": 2,
-    "type": "multiple-choice",
-    "question": "Why are abstractions in language models described as \"leaky\"?",
-    "options": {
-      "A": "Because they often reveal confidential training data.",
-      "B": "Because the underlying mechanics are not well-defined, unlike traditional programming abstractions.",
-      "C": "Because they consume excessive memory and computational resources.",
-      "D": "Because they cannot be easily transferred between different models."
-    },
-    "answer": "B",
-    "explaination": "time 3:16–3:24"
-  },
-  {
-    "week": 1,
-    "problem_numer": 3,
-    "type": "multiple-choice",
-    "question": "What is a major challenge in academia for training language models that is mentioned in the lecture?",
-    "options": {
-      "A": "Lack of skilled PhD students to conduct the research.",
-      "B": "The high cost and secrecy surrounding frontier models like GPT-4.",
-      "C": "Insufficient theoretical knowledge about transformer architectures.",
-      "D": "The difficulty in obtaining high-quality training data."
-    },
-    "answer": "B",
-    "explaination": "time 4:05–4:45"
-  },
-  {
-    "week": 1,
-    "problem_numer": 4,
-    "type": "multiple-choice",
     "question": "How does the relationship between FLOPs spent in attention layers versus MLP layers change with model scale?",
     "options": {
       "A": "Attention layers consistently dominate FLOPs usage regardless of model size.",
@@ -57,7 +15,7 @@
   },
   {
     "week": 1,
-    "problem_numer": 5,
+    "problem_numer": 2,
     "type": "multiple-choice",
     "question": "What does the phenomenon of \"emergent behavior\" in large language models imply?",
     "options": {
@@ -71,35 +29,7 @@
   },
   {
     "week": 1,
-    "problem_numer": 6,
-    "type": "multiple-choice",
-    "question": "Which of the following is NOT one of the three types of knowledge the course aims to impart?",
-    "options": {
-      "A": "Mechanics (how things work, e.g., a transformer).",
-      "B": "Mindset (e.g., taking scaling seriously).",
-      "C": "Intuitions (which decisions lead to good models).",
-      "D": "Heuristics (shortcuts for prompt engineering)."
-    },
-    "answer": "D",
-    "explaination": "time 7:05–8:12"
-  },
-  {
-    "week": 1,
-    "problem_numer": 7,
-    "type": "multiple-choice",
-    "question": "According to a Shazeer paper, what was the given reason for the success of the SwiGLU non-linearity?",
-    "options": {
-      "A": "It was mathematically proven to be superior to ReLU.",
-      "B": "It was based on principles of cognitive neuroscience.",
-      "C": "The paper offered no scientific explanation, attributing it to \"divine benevolence\".",
-      "D": "It was a simplified version of a more complex, pre-existing activation function."
-    },
-    "answer": "C",
-    "explaination": "time 8:59–9:17"
-  },
-  {
-    "week": 1,
-    "problem_numer": 8,
+    "problem_numer": 3,
     "type": "multiple-choice",
     "question": "What is the correct interpretation of the \"bitter lesson\" as presented in the lecture?",
     "options": {
@@ -113,161 +43,7 @@
   },
   {
     "week": 1,
-    "problem_numer": 9,
-    "type": "multiple-choice",
-    "question": "The lecture highlights a significant improvement in algorithmic efficiency for ImageNet training between 2012 and 2019. How large was this improvement?",
-    "options": {
-      "A": "10x, roughly in line with Moore's law.",
-      "B": "2x, a modest but important gain.",
-      "C": "100x, far exceeding any hardware improvements.",
-      "D": "44x, a rate faster than Moore's law."
-    },
-    "answer": "D",
-    "explaination": "time 11:02–11:09"
-  },
-  {
-    "week": 1,
-    "problem_numer": 10,
-    "type": "multiple-choice",
-    "question": "What is the central question that the lecture proposes should frame the task of building language models?",
-    "options": {
-      "A": "How can we build a model that perfectly mimics human conversation?",
-      "B": "What is the fastest way to train a model on the entire internet?",
-      "C": "What is the best model one can build given a certain compute and data budget?",
-      "D": "How can we ensure a model is completely safe and unbiased before deployment?"
-    },
-    "answer": "C",
-    "explaination": "time 11:42–11:47"
-  },
-  {
-    "week": 1,
-    "problem_numer": 11,
-    "type": "multiple-choice",
-    "question": "Which of these is NOT an \"ingredient\" mentioned as falling into place during the 2010s that enabled the deep learning revolution for language models?",
-    "options": {
-      "A": "The Adam optimizer.",
-      "B": "The transformer architecture.",
-      "C": "The concept of reinforcement learning from human feedback (RLHF).",
-      "D": "Seq-to-seq models."
-    },
-    "answer": "C",
-    "explaination": "time 13:21–14:00"
-  },
-  {
-    "week": 1,
-    "problem_numer": 12,
-    "type": "multiple-choice",
-    "question": "What was the key contribution of models like ELMo, BERT, and T5?",
-    "options": {
-      "A": "They were the first models to use the transformer architecture.",
-      "B": "They pioneered the idea of foundation models that could be adapted to many downstream tasks.",
-      "C": "They were the first truly open-source models with both weights and data released.",
-      "D": "They demonstrated emergent abilities like in-context learning."
-    },
-    "answer": "B",
-    "explaination": "time 14:43–14:51"
-  },
-  {
-    "week": 1,
-    "problem_numer": 13,
-    "type": "multiple-choice",
-    "question": "The lecture describes three levels of openness for language models. What is the defining characteristic of \"open weight\" models?",
-    "options": {
-      "A": "The model weights are available, but details about the training data are often missing.",
-      "B": "Only the model's architecture is published, not the weights or data.",
-      "C": "All weights, data, and training code are fully available.",
-      "D": "The model is accessible via an API, but no other details are provided."
-    },
-    "answer": "A",
-    "explaination": "time 16:33–16:39"
-  },
-  {
-    "week": 1,
-    "problem_numer": 14,
-    "type": "multiple-choice",
-    "question": "In the overview of the course's five pillars, what is the goal of the \"Basics\" unit?",
-    "options": {
-      "A": "To learn how to use pre-trained models via APIs.",
-      "B": "To get a basic version of a full model training pipeline working from scratch.",
-      "C": "To understand the history and theory behind language models.",
-      "D": "To master advanced prompt engineering techniques."
-    },
-    "answer": "B",
-    "explaination": "time 27:43–27:49"
-  },
-  {
-    "week": 1,
-    "problem_numer": 15,
-    "type": "multiple-choice",
-    "question": "Which improvement to the original transformer architecture is a type of non-linear activation function?",
-    "options": {
-      "A": "RMSNorm",
-      "B": "Rotary Positional Embeddings (RoPE)",
-      "C": "SwiGLU",
-      "D": "Mixture of Experts (MoE)"
-    },
-    "answer": "C",
-    "explaination": "time 30:02–30:11"
-  },
-  {
-    "week": 1,
-    "problem_numer": 16,
-    "type": "multiple-choice",
-    "question": "What normalization method is mentioned as a simpler alternative to the original transformer's LayerNorm?",
-    "options": {
-      "A": "BatchNorm",
-      "B": "RMSNorm",
-      "C": "InstanceNorm",
-      "D": "GroupNorm"
-    },
-    "answer": "B",
-    "explaination": "time 30:24–30:30"
-  },
-  {
-    "week": 1,
-    "problem_numer": 17,
-    "type": "multiple-choice",
-    "question": "What will be the primary task in Assignment 1?",
-    "options": {
-      "A": "Fine-tuning a pre-trained model on a custom dataset.",
-      "B": "Implementing a BPE tokenizer, transformer model, and training loop from scratch using PyTorch.",
-      "C": "Writing a research paper on the ethics of large language models.",
-      "D": "Optimizing a model's inference speed using Triton."
-    },
-    "answer": "B",
-    "explaination": "time 32:27–32:48"
-  },
-  {
-    "week": 1,
-    "problem_numer": 18,
-    "type": "multiple-choice",
-    "question": "In the \"Systems\" part of the course, what is the main challenge related to GPU hardware?",
-    "options": {
-      "A": "The slow speed of floating point operations.",
-      "B": "The high cost of data movement between memory and compute units.",
-      "C": "The lack of available GPUs for academic research.",
-      "D": "The difficulty of writing code in CUDA."
-    },
-    "answer": "B",
-    "explaination": "time 35:15–35:39"
-  },
-  {
-    "week": 1,
-    "problem_numer": 19,
-    "type": "multiple-choice",
-    "question": "What is the purpose of using Triton in the \"Systems\" unit?",
-    "options": {
-      "A": "To build custom, high-performance GPU kernels for operations like fusion and tiling.",
-      "B": "To automatically parallelize model training across multiple nodes.",
-      "C": "To manage and schedule jobs on the H100 cluster.",
-      "D": "To visualize the internal states of a running model."
-    },
-    "answer": "A",
-    "explaination": "time 35:54–36:00"
-  },
-  {
-    "week": 1,
-    "problem_numer": 20,
+    "problem_numer": 4,
     "type": "multiple-choice",
     "question": "What makes the autoregressive decoding part of inference particularly difficult to optimize?",
     "options": {
@@ -281,7 +57,7 @@
   },
   {
     "week": 1,
-    "problem_numer": 21,
+    "problem_numer": 5,
     "type": "multiple-choice",
     "question": "What is speculative decoding?",
     "options": {
@@ -295,35 +71,7 @@
   },
   {
     "week": 1,
-    "problem_numer": 22,
-    "type": "multiple-choice",
-    "question": "What is the key question that \"Scaling Laws\" aim to answer?",
-    "options": {
-      "A": "How much will it cost to train the next generation of models?",
-      "B": "Given a fixed compute budget, what is the optimal model size and amount of training data?",
-      "C": "Which hardware is most efficient for training transformers?",
-      "D": "At what point do models start to show emergent abilities?"
-    },
-    "answer": "B",
-    "explaination": "time 41:11–41:22"
-  },
-  {
-    "week": 1,
-    "problem_numer": 23,
-    "type": "multiple-choice",
-    "question": "The \"Chinchilla optimal\" scaling laws suggest a simple rule of thumb for the relationship between model size (N) and the number of tokens to train on. What is that rule?",
-    "options": {
-      "A": "Train on N * 10 tokens.",
-      "B": "Train on N * 20 tokens.",
-      "C": "Train on N^2 tokens.",
-      "D": "Train on sqrt(N) tokens."
-    },
-    "answer": "B",
-    "explaination": "time 42:23–42:37"
-  },
-  {
-    "week": 1,
-    "problem_numer": 24,
+    "problem_numer": 6,
     "type": "multiple-choice",
     "question": "What is a primary finding from looking at raw Common Crawl data?",
     "options": {
@@ -337,7 +85,7 @@
   },
   {
     "week": 1,
-    "problem_numer": 25,
+    "problem_numer": 7,
     "type": "multiple-choice",
     "question": "Why is deduplication of the training data an important step?",
     "options": {
@@ -351,7 +99,7 @@
   },
   {
     "week": 1,
-    "problem_numer": 26,
+    "problem_numer": 8,
     "type": "multiple-choice",
     "question": "What is the goal of the \"Alignment\" phase of model training?",
     "options": {
@@ -365,7 +113,7 @@
   },
   {
     "week": 1,
-    "problem_numer": 27,
+    "problem_numer": 9,
     "type": "multiple-choice",
     "question": "What kind of data is used in Supervised Fine-Tuning (SFT)?",
     "options": {
@@ -379,35 +127,7 @@
   },
   {
     "week": 1,
-    "problem_numer": 28,
-    "type": "multiple-choice",
-    "question": "What is the primary advantage of learning from feedback (like DPO) over SFT?",
-    "options": {
-      "A": "It allows the model to learn from lighter forms of annotation, like preference data, which can be cheaper to collect.",
-      "B": "It is computationally less expensive than SFT.",
-      "C": "It completely eliminates the need for human-generated data.",
-      "D": "It is the only way to teach a model safety and refusal skills."
-    },
-    "answer": "A",
-    "explaination": "time 53:04–53:13"
-  },
-  {
-    "week": 1,
-    "problem_numer": 29,
-    "type": "multiple-choice",
-    "question": "What type of data does the DPO (Direct Preference Optimization) algorithm use?",
-    "options": {
-      "A": "User-assistant dialogue turns.",
-      "B": "Text with quality scores assigned by a verifier.",
-      "C": "Pairs of responses where one is labeled as better than the other.",
-      "D": "A dataset of harmful prompts to teach refusal."
-    },
-    "answer": "C",
-    "explaination": "time 53:20–54:37"
-  },
-  {
-    "week": 1,
-    "problem_numer": 30,
+    "problem_numer": 10,
     "type": "multiple-choice",
     "question": "What is the core function of a tokenizer in a language model pipeline?",
     "options": {
@@ -421,7 +141,7 @@
   },
   {
     "week": 1,
-    "problem_numer": 31,
+    "problem_numer": 11,
     "type": "multiple-choice",
     "question": "What is a significant drawback of using simple character-based tokenization with Unicode code points?",
     "options": {
@@ -435,7 +155,7 @@
   },
   {
     "week": 1,
-    "problem_numer": 32,
+    "problem_numer": 12,
     "type": "multiple-choice",
     "question": "What is the main problem with pure byte-based tokenization?",
     "options": {
@@ -449,7 +169,7 @@
   },
   {
     "week": 1,
-    "problem_numer": 33,
+    "problem_numer": 13,
     "type": "multiple-choice",
     "question": "What is a major issue with traditional word-based tokenization that BPE aims to solve?",
     "options": {
@@ -463,21 +183,7 @@
   },
   {
     "week": 1,
-    "problem_numer": 34,
-    "type": "multiple-choice",
-    "question": "The Byte Pair Encoding (BPE) algorithm was first introduced to NLP for what task?",
-    "options": {
-      "A": "Text classification.",
-      "B": "Language modeling.",
-      "C": "Named entity recognition.",
-      "D": "Neural machine translation."
-    },
-    "answer": "D",
-    "explaination": "time 1:11:16–1:11:22"
-  },
-  {
-    "week": 1,
-    "problem_numer": 35,
+    "problem_numer": 14,
     "type": "multiple-choice",
     "question": "What is the fundamental principle of the BPE algorithm?",
     "options": {
@@ -491,35 +197,7 @@
   },
   {
     "week": 1,
-    "problem_numer": 36,
-    "type": "multiple-choice",
-    "question": "In the BPE training process, what is the initial state of the text sequence?",
-    "options": {
-      "A": "It is a sequence of words separated by spaces.",
-      "B": "It is a sequence of Unicode characters.",
-      "C": "It is a sequence of bytes.",
-      "D": "It is a sequence of pre-defined subword units."
-    },
-    "answer": "C",
-    "explaination": "time 1:12:43–1:12:49"
-  },
-  {
-    "week": 1,
-    "problem_numer": 37,
-    "type": "multiple-choice",
-    "question": "As the BPE algorithm performs merges, what happens to the length of the token sequence representing the training text?",
-    "options": {
-      "A": "It increases.",
-      "B": "It stays the same.",
-      "C": "It decreases.",
-      "D": "It fluctuates unpredictably."
-    },
-    "answer": "C",
-    "explaination": "time 1:15:46–1:15:46"
-  },
-  {
-    "week": 1,
-    "problem_numer": 38,
+    "problem_numer": 15,
     "type": "multiple-choice",
     "question": "When using a trained BPE tokenizer to encode a new string, what is the process?",
     "options": {
@@ -533,7 +211,7 @@
   },
   {
     "week": 1,
-    "problem_numer": 39,
+    "problem_numer": 16,
     "type": "multiple-choice",
     "question": "The lecture mentions a \"compression ratio\" for tokenizers. What does this ratio represent?",
     "options": {
@@ -547,35 +225,7 @@
   },
   {
     "week": 1,
-    "problem_numer": 40,
-    "type": "multiple-choice",
-    "question": "The GPT-2 tokenizer uses a pre-tokenization step before applying BPE. What does this step do?",
-    "options": {
-      "A": "It converts all text to lowercase.",
-      "B": "It removes all punctuation.",
-      "C": "It uses a regular expression to split the string into segments, and BPE is run on each segment.",
-      "D": "It translates the text into a standardized byte format."
-    },
-    "answer": "C",
-    "explaination": "time 1:12:34–1:12:43"
-  },
-  {
-    "week": 1,
-    "problem_numer": 41,
-    "type": "multiple-choice",
-    "question": "What is the current status of \"tokenizer-free\" approaches that operate directly on raw bytes?",
-    "options": {
-      "A": "They are the new standard for all frontier models.",
-      "B": "They have been shown to be more compute-efficient than BPE.",
-      "C": "The work is promising, but so far has not been successfully scaled to frontier models.",
-      "D": "They have been proven to be fundamentally flawed and are no longer an active area of research."
-    },
-    "answer": "C",
-    "explaination": "time 28:43–28:56"
-  },
-  {
-    "week": 1,
-    "problem_numer": 42,
+    "problem_numer": 17,
     "type": "multiple-choice",
     "question": "The lecture mentions that if you have a lot of data but are compute-constrained, you might filter data aggressively. Why?",
     "options": {
@@ -589,49 +239,7 @@
   },
   {
     "week": 1,
-    "problem_numer": 43,
-    "type": "multiple-choice",
-    "question": "Which optimizer is mentioned as the one predominantly used and taught in the class?",
-    "options": {
-      "A": "AdamW",
-      "B": "SGD",
-      "C": "Muon",
-      "D": "SOAP"
-    },
-    "answer": "A",
-    "explaination": "time 31:42–31:48"
-  },
-  {
-    "week": 1,
-    "problem_numer": 44,
-    "type": "multiple-choice",
-    "question": "What is the main reason that training is typically done for only a single epoch in a compute-constrained regime?",
-    "options": {
-      "A": "To prevent the model from overfitting to the training data.",
-      "B": "Multiple epochs provide diminishing returns and it's more efficient to see more unique data.",
-      "C": "The hardware cannot handle reloading the dataset for a second epoch.",
-      "D": "It is a convention set by the original transformer paper."
-    },
-    "answer": "B",
-    "explaination": "time 57:11–57:18"
-  },
-  {
-    "week": 1,
-    "problem_numer": 45,
-    "type": "multiple-choice",
-    "question": "In the GPU analogy, what do the \"factory\" and the \"warehouse\" represent?",
-    "options": {
-      "A": "Factory: CPU, Warehouse: GPU",
-      "B": "Factory: Compute units, Warehouse: Memory (DRAM)",
-      "C": "Factory: The entire GPU, Warehouse: The network connection",
-      "D": "Factory: The software, Warehouse: The hardware"
-    },
-    "answer": "B",
-    "explaination": "time 35:15–35:15"
-  },
-  {
-    "week": 1,
-    "problem_numer": 46,
+    "problem_numer": 18,
     "type": "multiple-choice",
     "question": "What distinguishes the \"pre-fill\" phase from the \"decode\" phase in inference?",
     "options": {
@@ -645,35 +253,7 @@
   },
   {
     "week": 1,
-    "problem_numer": 47,
-    "type": "multiple-choice",
-    "question": "What kind of supervision can be used in domains like math or code where formal verification is possible?",
-    "options": {
-      "A": "Preference data from human labelers.",
-      "B": "Using a formal verifier to check the correctness of a generated response.",
-      "C": "Instruction-following data from online tutorials.",
-      "D": "Self-generated data from the model itself."
-    },
-    "answer": "B",
-    "explaination": "time 53:50–53:56"
-  },
-  {
-    "week": 1,
-    "problem_numer": 48,
-    "type": "multiple-choice",
-    "question": "Which alternative to the transformer, mentioned as a more radical architectural change, is based on state space models?",
-    "options": {
-      "A": "GQA (Grouped-Query Attention)",
-      "B": "Mixture of Experts (MoE)",
-      "C": "Hyena",
-      "D": "SwiGLU"
-    },
-    "answer": "C",
-    "explaination": "time 31:17–31:17"
-  },
-  {
-    "week": 1,
-    "problem_numer": 49,
+    "problem_numer": 19,
     "type": "multiple-choice",
     "question": "Why is having a good base model crucial before the alignment phase?",
     "options": {
@@ -687,7 +267,7 @@
   },
   {
     "week": 1,
-    "problem_numer": 50,
+    "problem_numer": 20,
     "type": "multiple-choice",
     "question": "By convention, where is the space character typically placed by tokenizers like BPE?",
     "options": {
