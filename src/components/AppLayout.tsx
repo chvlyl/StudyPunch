@@ -1,7 +1,7 @@
 'use client';
 
 import Sidebar from './Sidebar';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Menu } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -11,6 +11,24 @@ interface AppLayoutProps {
 
 export default function AppLayout({ children }: AppLayoutProps) {
   const [isSidebarOpen, setSidebarOpen] = useState(true);
+
+  useEffect(() => {
+    const checkIfMobile = () => {
+      const isMobileWidth = window.innerWidth < 768; // md breakpoint
+      const isMobileUserAgent = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      const isMobile = isMobileWidth || isMobileUserAgent;
+      
+      setSidebarOpen(!isMobile); // Close on mobile, open on desktop
+    };
+
+    // Check on initial load
+    checkIfMobile();
+
+    // Listen for window resize
+    window.addEventListener('resize', checkIfMobile);
+    
+    return () => window.removeEventListener('resize', checkIfMobile);
+  }, []);
 
   const toggleSidebar = () => {
     setSidebarOpen(!isSidebarOpen);
