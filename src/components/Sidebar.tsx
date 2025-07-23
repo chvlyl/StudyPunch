@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import { Calendar, BookCopy, LogOut, User as UserIcon, Search } from 'lucide-react';
+import { Calendar, BookCopy, LogOut, User as UserIcon, Search, Menu } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 import { useRouter } from 'next/navigation';
 import { Profile } from '@/lib/types';
@@ -25,7 +25,11 @@ const navigationItems = [
   { name: '寻找课程', href: '/find-courses', icon: Search },
 ];
 
-export default function Sidebar() {
+interface SidebarProps {
+  toggleSidebar: () => void;
+}
+
+export default function Sidebar({ toggleSidebar }: SidebarProps) {
   const pathname = usePathname();
   const router = useRouter();
   const supabase = createClient();
@@ -76,14 +80,24 @@ export default function Sidebar() {
   };
 
   return (
-    <div className="flex flex-col h-full bg-gray-50 border-r border-gray-200 w-64">
-      {/* Logo */}
-      <Link href="/">
-        <div className="flex flex-col items-center justify-center h-20 px-4 border-b border-gray-200 cursor-pointer">
-          <h1 className="text-xl font-bold text-gray-900">学霸打卡</h1>
-          <span className="text-xs text-gray-500">v 0.7.21</span>
-        </div>
-      </Link>
+    <div className="flex flex-col h-full bg-gray-50 border-r border-gray-200 w-64 shadow-xl">
+      {/* Logo and Close Button */}
+      <div className="relative flex items-center h-20 px-4 border-b border-gray-200">
+        <button 
+          onClick={toggleSidebar} 
+          className="p-1 rounded-md hover:bg-gray-200 z-10"
+          aria-label="Close sidebar"
+        >
+          <Menu className="w-6 h-6 text-gray-600" />
+        </button>
+        
+        <Link href="/" className="absolute inset-0 flex items-center justify-center">
+          <div className="flex flex-col items-center cursor-pointer">
+            <h1 className="text-xl font-bold text-gray-900">学霸打卡</h1>
+            <span className="text-xs text-gray-500">v 0.7.22</span>
+          </div>
+        </Link>
+      </div>
 
       {/* Navigation */}
       <nav className="flex-1 px-4 py-4 space-y-2">
