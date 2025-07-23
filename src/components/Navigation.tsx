@@ -36,8 +36,9 @@ export function Navigation() {
               <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 学霸打卡
               </span>
-              <div className="text-xs text-slate-500 dark:text-slate-400 -mt-1">
-                StudyPunch
+              <div className="text-xs text-slate-500 dark:text-slate-400 -mt-1 flex items-center gap-2">
+                <span>StudyPunch</span>
+                <span>v0.7.22</span>
               </div>
             </div>
           </Link>
