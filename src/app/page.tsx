@@ -227,7 +227,7 @@ export default function CoursesPage() {
   return (
     <AppLayout>
       <div className="min-h-screen bg-slate-50 dark:bg-[#0B1120]">
-        {/* Dashboard Header */}
+        {/* User Welcome Header */}
         <div className="bg-white dark:bg-card border-b border-slate-200 dark:border-slate-700">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <motion.div
@@ -241,10 +241,10 @@ export default function CoursesPage() {
                 </div>
                 <div>
                   <h1 className="text-3xl font-bold text-slate-900 dark:text-white">
-                    学习仪表盘
+                    欢迎回来！
                   </h1>
                   <p className="text-slate-600 dark:text-slate-400">
-                    欢迎回来！继续您的学习之旅
+                    继续您的学习之旅
                   </p>
                 </div>
               </div>
@@ -277,49 +277,58 @@ export default function CoursesPage() {
             </motion.div>
           )}
 
-          {/* Metrics Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            {updatedMetrics.map((metric, index) => (
-              <motion.div
-                key={metric.title}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1, duration: 0.6 }}
-                className="metric-card relative overflow-hidden"
-              >
-                <div className="flex items-center justify-between mb-4">
-                  <div className={`p-3 bg-gradient-to-r ${metric.gradient} rounded-lg shadow-sm`}>
-                    {metric.icon}
+          {/* Dashboard Section */}
+          <div className="mb-8">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-2xl font-bold text-slate-900 dark:text-white">学习仪表盘</h2>
+            </div>
+            
+            {/* Metrics Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {updatedMetrics.map((metric, index) => (
+                <motion.div
+                  key={metric.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1, duration: 0.6 }}
+                  className="metric-card relative overflow-hidden"
+                >
+                  <div className="flex items-center justify-between mb-4">
+                    <div className={`p-3 bg-gradient-to-r ${metric.gradient} rounded-lg shadow-sm`}>
+                      {metric.icon}
+                    </div>
+                    {/* 暂时隐藏增长指标显示，保留逻辑以备后用 */}
+                    {/* <span className="text-sm font-medium text-green-600 dark:text-green-400">
+                      +{index + 1}
+                    </span> */}
                   </div>
-                  <span className="text-sm font-medium text-green-600 dark:text-green-400">
-                    +{index + 1}
-                  </span>
-                </div>
-                <h3 className="text-3xl font-bold text-slate-900 dark:text-white mb-1">
-                  {metric.value}
-                </h3>
-                <p className="text-sm text-slate-600 dark:text-slate-400 mb-1">
-                  {metric.title}
-                </p>
-                <p className="text-xs text-slate-500 dark:text-slate-500">
-                  {metric.change}
-                </p>
-              </motion.div>
-            ))}
+                  <h3 className="text-3xl font-bold text-slate-900 dark:text-white mb-1">
+                    {metric.value}
+                  </h3>
+                  <p className="text-sm text-slate-600 dark:text-slate-400 mb-1">
+                    {metric.title}
+                  </p>
+                  <p className="text-xs text-slate-500 dark:text-slate-500">
+                    {metric.change}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
           </div>
 
           {/* Courses Section */}
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white">我的课程</h2>
-            <Link href="/find-courses">
-              <button className="outline-button group">
-                <span className="flex items-center gap-2">
-                  寻找更多课程
-                  <ChevronRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-                </span>
-              </button>
-            </Link>
-          </div>
+          <div className="mb-8">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-2xl font-bold text-slate-900 dark:text-white">我的课程</h2>
+              <Link href="/find-courses">
+                <button className="outline-button group">
+                  <span className="flex items-center gap-2">
+                    寻找更多课程
+                    <ChevronRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                  </span>
+                </button>
+              </Link>
+            </div>
 
           {courses && courses.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -417,6 +426,7 @@ export default function CoursesPage() {
               </Link>
             </motion.div>
           )}
+          </div>
         </div>
       </div>
     </AppLayout>
