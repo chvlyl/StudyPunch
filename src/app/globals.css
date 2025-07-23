@@ -44,14 +44,14 @@
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
+  --radius: 0.75rem;
+  --background: oklch(0.985 0 0); /* 更现代的浅灰背景 */
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
+  --primary: oklch(0.582 0.191 264.376); /* 现代蓝色 */
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
@@ -79,14 +79,14 @@
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
+  --background: oklch(0.07 0 0); /* 现代深色背景 */
   --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
+  --card: oklch(0.15 0 0); /* 更深的卡片背景 */
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
+  --primary: oklch(0.582 0.191 264.376); /* 保持蓝色主题 */
+  --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
@@ -114,9 +114,227 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    border-color: var(--border);
+    outline-color: color-mix(in srgb, var(--ring), transparent 50%);
   }
   body {
-    @apply bg-background text-foreground;
+    background-color: rgb(248 250 252);
+    color: var(--foreground);
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
   }
+  .dark body {
+    background-color: rgb(11 17 32);
+  }
+}
+
+/* 现代化的动画效果 */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.animate-shimmer {
+  animation: shimmer 1.5s ease-in-out infinite;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  background-size: 200px 100%;
+}
+
+/* 现代化卡片样式 */
+.modern-card {
+  background-color: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  border: 1px solid rgb(226 232 240);
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}
+
+.modern-card:hover {
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.dark .modern-card {
+  background-color: var(--card);
+  border-color: rgb(71 85 105);
+}
+
+.glass-card {
+  backdrop-filter: blur(12px);
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+}
+
+.dark .glass-card {
+  background-color: rgba(30, 41, 59, 0.8);
+  border-color: rgba(71, 85, 105, 0.5);
+}
+
+/* 现代化按钮样式 */
+.modern-button {
+  padding: 0.75rem 1.5rem;
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+  font-weight: 600;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+  transform: scale(1);
+}
+
+.modern-button:hover {
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  transform: scale(1.02);
+}
+
+.modern-button:active {
+  transform: scale(0.98);
+}
+
+.outline-button {
+  padding: 0.75rem 1.5rem;
+  border: 1px solid rgb(203 213 225);
+  color: rgb(51 65 85);
+  font-weight: 500;
+  border-radius: 0.5rem;
+  background-color: transparent;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}
+
+.outline-button:hover {
+  background-color: rgb(248 250 252);
+}
+
+.dark .outline-button {
+  border-color: rgb(71 85 105);
+  color: rgb(203 213 225);
+}
+
+.dark .outline-button:hover {
+  background-color: rgb(30 41 59);
+}
+
+/* 现代化指标卡片 */
+.metric-card {
+  background-color: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  border: 1px solid rgb(226 232 240);
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}
+
+.metric-card:hover {
+  box-shadow: 0 10px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+}
+
+.dark .metric-card {
+  background-color: var(--card);
+  border-color: rgb(71 85 105);
+}
+
+.metric-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to right, rgba(59, 130, 246, 0.1), rgba(147, 51, 234, 0.1));
+  border-radius: 0.75rem;
+  opacity: 0;
+  transition-property: opacity;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}
+
+.metric-card:hover::before {
+  opacity: 1;
+}
+
+/* 加载状态 */
+.loading-skeleton {
+  background-color: rgb(226 232 240);
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  border-radius: inherit;
+}
+
+.dark .loading-skeleton {
+  background-color: rgb(71 85 105);
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* 平滑滚动 */
+html {
+  scroll-behavior: smooth;
+}
+
+/* 自定义滚动条 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgb(241 245 249);
+}
+
+.dark ::-webkit-scrollbar-track {
+  background-color: rgb(30 41 59);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(203 213 225);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(148 163 184);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background-color: rgb(71 85 105);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(100 116 139);
 }
