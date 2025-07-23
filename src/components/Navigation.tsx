@@ -1,7 +1,7 @@
 'use client';
 
 import { useAuth } from '@/contexts/AuthContext';
-import { User, LogOut, LogIn, Calendar, BookCopy, Search } from 'lucide-react';
+import { User, LogOut, LogIn, BookCopy, Search } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';

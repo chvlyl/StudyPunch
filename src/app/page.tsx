@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import AppLayout from '@/components/AppLayout';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase/client';
+import type { User } from '@supabase/supabase-js';
 import { 
   BookOpen, 
   Clock, 
@@ -68,7 +69,7 @@ const dashboardMetrics = [
 export default function CoursesPage() {
   const [courseData, setCourseData] = useState<CourseData>({ courses: [], error: null });
   const [isLoading, setIsLoading] = useState(true);
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -95,7 +96,7 @@ export default function CoursesPage() {
           courses: courses || [],
           error: error?.message || null
         });
-      } catch (error) {
+      } catch {
         setCourseData({ courses: [], error: 'Failed to load data' });
       } finally {
         setIsLoading(false);

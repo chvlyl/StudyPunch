@@ -1,9 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    outputFileTracingIncludes: {
-      '/*': ['./quiz/**/*'],
-    },
+  outputFileTracingIncludes: {
+    '/*': ['./quiz/**/*'],
   },
   images: {
     remotePatterns: [
@@ -14,6 +12,17 @@ const nextConfig = {
         pathname: '/**',
       },
     ],
+  },
+  // 排除参考项目目录
+  webpack: (config: any) => {
+    config.watchOptions = {
+      ...config.watchOptions,
+      ignored: [
+        '**/node_modules/**',
+        '**/launch-mvp-stripe-nextjs-supabase/**',
+      ],
+    };
+    return config;
   },
 };
 

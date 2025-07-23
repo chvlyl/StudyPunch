@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import AppLayout from '@/components/AppLayout';
 import { createClient } from '@/lib/supabase/client';
 import { useRouter } from 'next/navigation';
+import type { User } from '@supabase/supabase-js';
 import { 
   Calendar,
   CheckCircle2,
@@ -35,7 +36,7 @@ interface TaskWithStatus extends Task {
 
 export default function AllTasksPage() {
   const [tasks, setTasks] = useState<TaskWithStatus[]>([]);
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [filter, setFilter] = useState<'all' | 'todo' | 'complete' | 'overdue'>('all');
@@ -95,7 +96,7 @@ export default function AllTasksPage() {
         });
 
         setTasks(processedTasks);
-      } catch (err) {
+      } catch {
         setError('加载数据失败，请刷新重试');
       } finally {
         setIsLoading(false);
@@ -296,7 +297,7 @@ export default function AllTasksPage() {
                 ].map((filterOption) => (
                   <button
                     key={filterOption.key}
-                    onClick={() => setFilter(filterOption.key as any)}
+                    onClick={() => setFilter(filterOption.key as 'all' | 'todo' | 'complete' | 'overdue')}
                     className={`px-4 py-2 text-sm font-medium transition-all duration-300 ${
                       filter === filterOption.key
                         ? 'bg-blue-600 text-white'
