@@ -1,6 +1,7 @@
 'use client';
 
 import Sidebar from './Sidebar';
+import { Navigation } from './Navigation';
 import { useState, useEffect } from 'react';
 import { Menu } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -36,10 +37,13 @@ export default function AppLayout({ children }: AppLayoutProps) {
 
   return (
     <div className="min-h-screen bg-gray-100">
+      {/* Navigation bar */}
+      <Navigation />
+      
       {!isSidebarOpen && (
         <button 
           onClick={toggleSidebar}
-          className="fixed top-4 left-4 z-30 p-2 bg-white rounded-md shadow-lg hover:bg-gray-100 transition-colors"
+          className="fixed top-20 left-4 z-30 p-2 bg-white rounded-md shadow-lg hover:bg-gray-100 transition-colors"
           aria-label="Open sidebar"
         >
           <Menu className="w-6 h-6 text-gray-700" />
@@ -48,7 +52,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
 
       <div
         className={cn(
-          'fixed top-0 left-0 h-full z-40 transition-transform duration-300 ease-in-out',
+          'fixed top-16 left-0 h-full z-40 transition-transform duration-300 ease-in-out',
           isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
         )}
       >
@@ -57,7 +61,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
       
       <main 
         className={cn(
-          "transition-all duration-300 ease-in-out",
+          "transition-all duration-300 ease-in-out pt-16",
           isSidebarOpen ? "pl-64" : "pl-0"
         )}
       >

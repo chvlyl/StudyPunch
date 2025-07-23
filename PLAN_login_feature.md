@@ -1,7 +1,8 @@
 # StudyPunch 登录功能升级计划
 
 ## 🎯 项目目标
-将 StudyPunch 的简单 Google OAuth 登录升级为功能完整的认证系统，参考 launch-mvp-stripe-nextjs-supabase 项目的最佳实践。
+将 StudyPunch 的简单 Google OAuth 登录升级为功能完整的认证系统，
+参考 launch-mvp-stripe-nextjs-supabase 项目的最佳实践。
 
 ## 📊 现状分析
 
