@@ -1,0 +1,320 @@
+[
+  {
+    "week": 2,
+    "problem_numer": 1,
+    "type": "multiple-choice",
+    "question": "What is the approximate formula provided for calculating the total FLOPs needed to train a dense transformer model?",
+    "options": {
+      "A": "6 times the number of parameters times the number of tokens.",
+      "B": "2 times the number of parameters times the number of tokens.",
+      "C": "The number of parameters divided by the number of tokens.",
+      "D": "12 times the number of parameters plus the number of tokens."
+    },
+    "answer": "A",
+    "explaination": "time 0:55–1:22"
+  },
+  {
+    "week": 2,
+    "problem_numer": 2,
+    "type": "multiple-choice",
+    "question": "For a standard setup using the AdamW optimizer, how many bytes of memory are typically required per model parameter for the parameters, gradients, and optimizer state combined?",
+    "options": {
+      "A": "4 bytes",
+      "B": "8 bytes",
+      "C": "16 bytes",
+      "D": "32 bytes"
+    },
+    "answer": "C",
+    "explaination": "time 2:45–2:53"
+  },
+  {
+    "week": 2,
+    "problem_numer": 3,
+    "type": "multiple-choice",
+    "question": "How are the 32 bits of a `float32` (single-precision) number allocated?",
+    "options": {
+      "A": "1 for sign, 10 for exponent, 21 for fraction",
+      "B": "1 for sign, 8 for exponent, 23 for fraction",
+      "C": "2 for sign, 8 for exponent, 22 for fraction",
+      "D": "1 for sign, 5 for exponent, 26 for fraction"
+    },
+    "answer": "B",
+    "explaination": "time 6:20–6:27"
+  },
+  {
+    "week": 2,
+    "problem_numer": 4,
+    "type": "multiple-choice",
+    "question": "What primarily determines the memory usage of a tensor?",
+    "options": {
+      "A": "The number of dimensions and the stride",
+      "B": "The device (CPU/GPU) it is stored on",
+      "C": "The number of elements and the data type of each element",
+      "D": "The name of the variable pointing to the tensor"
+    },
+    "answer": "C",
+    "explaination": "time 7:17–7:47"
+  },
+  {
+    "week": 2,
+    "problem_numer": 5,
+    "type": "multiple-choice",
+    "question": "What is the principal drawback of using `float16` (half-precision) in deep learning?",
+    "options": {
+      "A": "It has lower precision than `bfloat16`.",
+      "B": "It has a limited dynamic range, risking underflow for small numbers.",
+      "C": "It consumes more memory than `float32`.",
+      "D": "It is not supported on NVIDIA hardware."
+    },
+    "answer": "B",
+    "explaination": "time 9:02–9:24"
+  },
+  {
+    "week": 2,
+    "problem_numer": 6,
+    "type": "multiple-choice",
+    "question": "How does `bfloat16` differ from `float16` to better suit deep learning tasks?",
+    "options": {
+      "A": "It allocates more bits to the fraction for higher precision.",
+      "B": "It uses 32 bits but with a different internal structure.",
+      "C": "It allocates more bits to the exponent, giving it the same dynamic range as `float32`.",
+      "D": "It was designed for scientific computing, not deep learning."
+    },
+    "answer": "C",
+    "explaination": "time 10:02–10:24"
+  },
+  {
+    "week": 2,
+    "problem_numer": 7,
+    "type": "multiple-choice",
+    "question": "For stable training, which data type is recommended for storing parameters and optimizer states, even when using mixed precision?",
+    "options": {
+      "A": "FP8",
+      "B": "float16",
+      "C": "bfloat16",
+      "D": "float32"
+    },
+    "answer": "D",
+    "explaination": "time 11:11–11:26"
+  },
+  
+  {
+    "week": 2,
+    "problem_numer": 8,
+    "type": "multiple-choice",
+    "question": "If you create a tensor `y` by taking a view of tensor `x` (e.g., `y = x.transpose(0, 1)`), what happens if you modify an element of `x`?",
+    "options": {
+      "A": "Only `x` is changed, as `y` is a copy.",
+      "B": "Both `x` and `y` might change, as they share the same underlying storage.",
+      "C": "It will cause a runtime error because views are immutable.",
+      "D": "`y` is unchanged, but a warning is issued."
+    },
+    "answer": "B",
+    "explaination": "time 19:17–19:47 and 21:09"
+  },
+
+  {
+    "week": 2,
+    "problem_numer": 9,
+    "type": "multiple-choice",
+    "question": "When is it necessary to call the `.contiguous()` method on a tensor?",
+    "options": {
+      "A": "To ensure it does not share memory with another tensor.",
+      "B": "Before saving the tensor to a file.",
+      "C": "When attempting to use `.view()` on a tensor that has become non-contiguous (e.g., after a transpose).",
+      "D": "To convert the tensor's data type to `float32`."
+    },
+    "answer": "C",
+    "explaination": "time 21:54–22:12"
+  },
+  {
+    "week": 2,
+    "problem_numer": 10,
+    "type": "multiple-choice",
+    "question": "What is the primary advantage of using `einsum` for tensor operations?",
+    "options": {
+      "A": "It automatically optimizes the computation to run faster than standard matrix multiplication.",
+      "B": "It allows for naming dimensions, which makes complex tensor manipulations more readable and less error-prone.",
+      "C": "It is the only method for performing operations on tensors with more than 4 dimensions.",
+      "D": "It reduces memory usage by performing all operations in-place."
+    },
+    "answer": "B",
+    "explaination": "time 26:12–26:32"
+  },
+  {
+    "week": 2,
+    "problem_numer": 11,
+    "type": "multiple-choice",
+    "question": "In an `einsum` expression, what operation is performed on dimensions that are named in the input but omitted from the output signature?",
+    "options": {
+      "A": "They are broadcasted.",
+      "B": "They are flattened into the last dimension.",
+      "C": "They are summed over, effectively reducing them.",
+      "D": "The operation results in an error."
+    },
+    "answer": "C",
+    "explaination": "time 28:26–28:36"
+  },
+  
+  {
+    "week": 2,
+    "problem_numer": 12,
+    "type": "multiple-choice",
+    "question": "How many floating-point operations (FLOPs) are involved in multiplying a matrix of size (M, K) with a matrix of size (K, N)?",
+    "options": {
+      "A": "M * K * N",
+      "B": "(M * K) + (K * N)",
+      "C": "2 * M * K * N",
+      "D": "M * N"
+    },
+    "answer": "C",
+    "explaination": "time 38:52–39:15"
+  },
+  {
+    "week": 2,
+    "problem_numer": 13,
+    "type": "multiple-choice",
+    "question": "What does MFU (Model FLOPs Utilization) represent?",
+    "options": {
+      "A": "The total memory footprint of the model.",
+      "B": "The number of FLOPs required for a single forward pass.",
+      "C": "The ratio of achieved FLOPs per second to the hardware's theoretical maximum.",
+      "D": "The percentage of time the GPU is active during training."
+    },
+    "answer": "C",
+    "explaination": "time 44:19–44:43"
+  },
+  
+  {
+    "week": 2,
+    "problem_numer": 14,
+    "type": "multiple-choice",
+    "question": "What is the rule of thumb for the total FLOPs of a training step (forward + backward pass)?",
+    "options": {
+      "A": "2 × (number of data points) × (number of parameters)",
+      "B": "4 × (number of data points) × (number of parameters)",
+      "C": "6 × (number of data points) × (number of parameters)",
+      "D": "8 × (number of data points) × (number of parameters)"
+    },
+    "answer": "C",
+    "explaination": "time 58:12–58:26"
+  },
+  {
+    "week": 2,
+    "problem_numer": 15,
+    "type": "multiple-choice",
+    "question": "Why is scaling weight initialization, such as by `1/sqrt(input_dim)`, a common practice?",
+    "options": {
+      "A": "It reduces the total number of parameters to be trained.",
+      "B": "It guarantees faster convergence in all cases.",
+      "C": "It helps prevent activations from exploding or vanishing, improving training stability.",
+      "D": "It is required by the PyTorch API for `nn.Parameter`."
+    },
+    "answer": "C",
+    "explaination": "time 1:01:03–1:01:20"
+  },
+  
+  
+  {
+    "week": 2,
+    "problem_numer": 16,
+    "type": "multiple-choice",
+    "question": "Besides model parameters and their gradients, what other major components contribute to the total memory usage during training?",
+    "options": {
+      "A": "Python interpreter and OS overhead.",
+      "B": "Activations and optimizer states.",
+      "C": "The code of the model and the data loader.",
+      "D": "Logging and checkpointing files."
+    },
+    "answer": "B",
+    "explaination": "time 1:11:21–1:11:39"
+  },
+  
+  {
+    "week": 2,
+    "problem_numer": 17,
+    "type": "multiple-choice",
+    "question": "What is the purpose of activation checkpointing (gradient checkpointing)?",
+    "options": {
+      "A": "To save the model weights after each activation.",
+      "B": "To trade compute for memory by recomputing activations during the backward pass instead of storing all of them.",
+      "C": "To verify that activations are within a valid numerical range.",
+      "D": "To speed up the forward pass by caching activations."
+    },
+    "answer": "B",
+    "explaination": "time 1:14:06–1:14:14"
+  },
+
+  {
+    "week": 2,
+    "problem_numer": 18,
+    "type": "multiple-choice",
+    "question": "In mixed-precision training, for which part of the process is it often beneficial to use lower precision like `bfloat16` or `FP8`?",
+    "options": {
+      "A": "Storing the master copy of the weights.",
+      "B": "The forward pass computations.",
+      "C": "The optimizer state updates.",
+      "D": "Gradient accumulation."
+    },
+    "answer": "B",
+    "explaination": "time 1:16:08–1:16:15"
+  },
+  {
+    "week": 2,
+    "problem_numer": 19,
+    "type": "multiple-choice",
+    "question": "When is aggressive quantization to very low precision (like `int4`) more commonly applied?",
+    "options": {
+      "A": "During the entire training process to save memory.",
+      "B": "During model inference, after the model has been trained.",
+      "C": "Only for the final layer of the network.",
+      "D": "It is a theoretical concept and not used in practice."
+    },
+    "answer": "B",
+    "explaination": "time 1:18:18–1:18:30"
+  },
+  {
+    "week": 2,
+    "problem_numer": 20,
+    "type": "multiple-choice",
+    "question": "Why is training with very low precision more difficult than inference with low precision?",
+    "options": {
+      "A": "Low precision hardware is not available for training.",
+      "B": "The numerical instability during training is much harder to manage.",
+      "C": "PyTorch does not support low precision data types for gradients.",
+      "D": "Inference requires higher precision for accurate results."
+    },
+    "answer": "B",
+    "explaination": "time 1:18:30–1:18:37"
+  },
+    {
+    "week": 2,
+    "problem_numer": 21,
+    "type": "multiple-choice",
+    "question": "What is the relationship between the number of parameters and the FLOPs required for a forward pass in a standard dense layer?",
+    "options": {
+      "A": "FLOPs are linearly proportional to the number of parameters.",
+      "B": "FLOPs are quadratically proportional to the number of parameters.",
+      "C": "FLOPs are logarithmically related to the number of parameters.",
+      "D": "There is no direct relationship between FLOPs and the number of parameters."
+    },
+    "answer": "A",
+    "explaination": "time 41:53-42:07"
+  },
+  
+  
+  {
+    "week": 2,
+    "problem_numer": 22,
+    "type": "multiple-choice",
+    "question": "What is the purpose of a causal attention mask in a language model?",
+    "options": {
+      "A": "To ensure the model's predictions for a token are only influenced by previous tokens, not future ones.",
+      "B": "To randomly mask out tokens to improve model robustness.",
+      "C": "To highlight the most important tokens in a sequence.",
+      "D": "To allow attention to flow in both directions, past and future."
+    },
+    "answer": "A",
+    "explaination": "time 23:32-23:39"
+  }
+] 
